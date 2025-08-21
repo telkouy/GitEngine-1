@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Zap } from "lucide-react";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
+import { DashboardSkeleton } from "@/components/ui/skeleton-components";
+import { LiveIndicator } from "@/components/ui/live-indicator";
+import { ExportModal } from "@/components/ui/export-modal";
+import { useWebSocket } from "@/hooks/use-websocket";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
@@ -31,6 +36,9 @@ export default function Dashboard() {
   // For demo purposes, using a fixed user ID
   const userId = "demo-user";
   const [isCompactMode, setIsCompactMode] = useState(false);
+  
+  // WebSocket connection for real-time updates
+  const { isConnected, lastMessage } = useWebSocket('ws://localhost:5000');
 
   const { data: user } = useQuery<User>({
     queryKey: ["/api/user/camila"],
@@ -41,20 +49,13 @@ export default function Dashboard() {
   });
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent-violet/10 to-accent-cyan/20 animate-gradient" />
-        <div className="relative">
-          <div className="w-20 h-20 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
-          <div className="absolute inset-0 w-20 h-20 border-4 border-transparent border-t-accent-cyan rounded-full animate-spin animate-reverse" style={{ animationDuration: '1.5s' }} />
-        </div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen flex relative overflow-hidden">
+    <ErrorBoundary>
+      <SidebarProvider>
+        <div className="min-h-screen flex relative overflow-hidden">
         {/* Animated Background */}
         <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/5" />
         <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(139,92,246,0.1),transparent_50%)]" />
@@ -99,6 +100,15 @@ export default function Dashboard() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
+                <LiveIndicator 
+                  isConnected={isConnected} 
+                  lastUpdate={lastMessage ? new Date() : undefined}
+                  className="hidden sm:flex" 
+                />
+                <ExportModal 
+                  data={dashboardData} 
+                  filename="vibe-coder-dashboard"
+                />
                 <Button
                   variant="ghost"
                   size="sm"
@@ -176,7 +186,8 @@ export default function Dashboard() {
         </div>
         </main>
       </SidebarInset>
-    </div>
-  </SidebarProvider>
+      </div>
+    </SidebarProvider>
+    </ErrorBoundary>
   );
 }
