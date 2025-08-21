@@ -7,7 +7,7 @@ import { Badge } from './badge';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
 import { Checkbox } from './checkbox';
 import { Label } from './label';
-import { DatePicker } from './calendar';
+// DatePicker component will be implemented separately
 
 interface FilterOption {
   id: string;
