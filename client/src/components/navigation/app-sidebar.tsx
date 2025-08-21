@@ -17,6 +17,7 @@ import {
   Search,
   ChevronRight,
 } from "lucide-react";
+import { NotificationCenter } from "@/components/ui/notification-center";
 import {
   Sidebar,
   SidebarContent,
@@ -309,9 +310,7 @@ export function AppSidebar() {
                   <p className="text-sm font-medium">Camila</p>
                   <p className="text-xs text-muted-foreground">Force of Nature</p>
                 </div>
-                <Button variant="ghost" size="sm" className="p-1">
-                  <Bell className="w-4 h-4" />
-                </Button>
+                <NotificationCenter />
               </motion.div>
             )}
           </AnimatePresence>
