@@ -30,17 +30,17 @@ export function NextSteps({ data = [] }: NextStepsProps) {
 
   return (
     <motion.div
-      className="bg-white/80 dark:bg-gray-800/80 glass-effect rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20"
+      className="glass-card rounded-xl p-6 floating-card"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Next Steps</h3>
-      <div className="space-y-4">
+      <h3 className="text-lg font-semibold text-foreground mb-4">Next Steps</h3>
+      <div className="space-y-3">
         {data.map((step, index) => (
           <motion.div
             key={step.id}
-            className={`flex items-center justify-between p-4 rounded-xl border-l-4 ${getPriorityColor(step.priority)}`}
+            className="flex items-center justify-between p-3 rounded-lg bg-muted/50 hover:bg-muted/70 transition-colors"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -48,11 +48,11 @@ export function NextSteps({ data = [] }: NextStepsProps) {
             <div className="flex items-center space-x-3">
               <div className={`w-2 h-2 ${getPriorityDot(step.priority)} rounded-full`}></div>
               <div>
-                <p className="font-medium text-gray-900 dark:text-white">{step.title}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{step.priority}</p>
+                <p className="font-medium text-foreground text-sm">{step.title}</p>
+                <p className="text-xs text-muted-foreground">{step.priority}</p>
               </div>
             </div>
-            <span className={`text-sm font-medium ${getPriorityColor(step.priority).split(' ').slice(-2).join(' ')}`}>
+            <span className="text-xs font-medium text-muted-foreground bg-background px-2 py-1 rounded">
               {step.estimatedTime}
             </span>
           </motion.div>

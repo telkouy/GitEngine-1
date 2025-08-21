@@ -23,6 +23,8 @@ export default function Dashboard() {
     queryKey: ["/api/dashboard", userId],
   });
 
+  const userData = user as any;
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
@@ -32,34 +34,34 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-background transition-colors duration-300">
       {/* Header */}
-      <header className="bg-white/80 dark:bg-gray-800/80 glass-effect border-b border-gray-200/20 dark:border-gray-700/20 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
+      <header className="glass-effect sticky top-0 z-50 border-b border-border/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-primary to-primary-light rounded-xl flex items-center justify-center">
-                  <Zap className="w-6 h-6 text-white" />
+                <div className="w-9 h-9 gradient-bg rounded-xl flex items-center justify-center shadow-lg">
+                  <Zap className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900 dark:text-white">Vibe Coder</h1>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">AI Product Builder</p>
+                  <h1 className="text-lg font-bold gradient-text">Vibe Coder</h1>
+                  <p className="text-xs text-muted-foreground">Command Center</p>
                 </div>
               </div>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <ThemeToggle />
-              <div className="w-10 h-10 bg-gradient-to-r from-accent-emerald to-accent-cyan rounded-full flex items-center justify-center">
-                <span className="text-white font-semibold text-sm">C</span>
+              <div className="w-8 h-8 bg-gradient-to-r from-accent-emerald to-accent-cyan rounded-full flex items-center justify-center shadow-md">
+                <span className="text-white font-semibold text-xs">C</span>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Welcome Section */}
         <motion.div 
           className="mb-8"
@@ -67,33 +69,38 @@ export default function Dashboard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Welcome back, {user?.name || 'Camila'}!
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 italic">
+          <div className="flex items-center justify-between mb-1">
+            <h2 className="text-2xl font-bold text-foreground">
+              Welcome back, {userData?.name || 'Camila'}!
+            </h2>
+            <div className="text-sm text-muted-foreground">
+              Force of Nature - Vibe Coder Command Center
+            </div>
+          </div>
+          <p className="text-muted-foreground italic text-sm">
             "Move fast, learn faster. - Susan"
           </p>
         </motion.div>
 
         {/* Stats Cards */}
-        <StatsCards data={dashboardData?.dailyStats} />
+        <StatsCards data={(dashboardData as any)?.dailyStats} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
           {/* Left Column */}
           <div className="lg:col-span-2 space-y-8">
-            <NextSteps data={dashboardData?.nextSteps} />
-            <CommitsTable data={dashboardData?.commits} />
-            <DocumentationHub data={dashboardData?.documentation} userId={userId} />
+            <NextSteps data={(dashboardData as any)?.nextSteps} />
+            <CommitsTable data={(dashboardData as any)?.commits} />
+            <DocumentationHub data={(dashboardData as any)?.documentation} userId={userId} />
           </div>
 
           {/* Right Column */}
           <div className="space-y-8">
-            <AIInsights data={dashboardData?.insights} userId={userId} />
-            <OKRsSection data={dashboardData?.okrs} />
-            <Achievements data={dashboardData?.achievements} />
+            <AIInsights data={(dashboardData as any)?.insights} userId={userId} />
+            <OKRsSection data={(dashboardData as any)?.okrs} />
+            <Achievements data={(dashboardData as any)?.achievements} />
             <SettingsProfile 
-              user={user} 
-              integrations={dashboardData?.integrations} 
+              user={userData} 
+              integrations={(dashboardData as any)?.integrations} 
             />
           </div>
         </div>

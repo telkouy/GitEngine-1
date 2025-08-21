@@ -39,22 +39,25 @@ export function StatsCards({ data }: StatsCardsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {cards.map((card, index) => (
         <motion.div
           key={index}
-          className="bg-white/80 dark:bg-gray-800/80 glass-effect rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20 hover:shadow-xl transition-all duration-300"
+          className="glass-card rounded-xl p-4 floating-card"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: card.delay }}
         >
-          <div className="flex items-center justify-between mb-4">
-            <div className={`w-12 h-12 bg-gradient-to-r ${card.gradient} rounded-xl flex items-center justify-center`}>
-              <card.icon className="w-6 h-6 text-white" />
+          <div className="flex items-center space-x-3">
+            <div className={`w-10 h-10 bg-gradient-to-r ${card.gradient} rounded-lg flex items-center justify-center shadow-md`}>
+              <card.icon className="w-5 h-5 text-white" />
             </div>
-            <div className="text-right">
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{card.value}</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">{card.label}</p>
+            <div className="flex-1">
+              <div className="flex items-center space-x-1">
+                <span className="text-xl font-bold text-foreground">{card.value}</span>
+                <span className="text-xs text-muted-foreground">💾</span>
+              </div>
+              <p className="text-sm text-muted-foreground">{card.label}</p>
             </div>
           </div>
         </motion.div>

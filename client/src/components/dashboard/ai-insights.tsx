@@ -83,58 +83,58 @@ export function AIInsights({ data = [], userId }: AIInsightsProps) {
 
   return (
     <motion.div
-      className="bg-white/80 dark:bg-gray-800/80 glass-effect rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20"
+      className="glass-card rounded-xl p-6 floating-card"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">AI Insights Engine</h3>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-lg font-semibold text-foreground">AI Insights Engine</h3>
         <Button
           onClick={() => generateInsightMutation.mutate()}
           disabled={generateInsightMutation.isPending}
-          className="bg-gradient-to-r from-primary to-primary-light text-white text-sm hover:shadow-lg transition-all duration-300"
+          className="gradient-bg text-white text-sm h-8 shadow-md hover:shadow-lg transition-all"
         >
-          <Sparkles className="w-4 h-4 mr-2" />
-          {generateInsightMutation.isPending ? "Generating..." : "Generate New Insight"}
+          <Sparkles className="w-3 h-3 mr-1" />
+          {generateInsightMutation.isPending ? "Generating..." : "✨ Generate New Insight"}
         </Button>
       </div>
 
-      <div className="flex items-center space-x-2 mb-4">
+      <div className="flex items-center space-x-1 mb-4">
         {categories.map((category) => (
           <Button
             key={category}
             variant={selectedCategory === category ? "default" : "ghost"}
             size="sm"
             onClick={() => setSelectedCategory(category)}
-            className={selectedCategory === category ? "bg-primary text-white" : ""}
+            className={`text-xs h-7 ${selectedCategory === category ? "gradient-bg text-white shadow-md" : "text-muted-foreground"}`}
           >
             {category}
           </Button>
         ))}
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3">
         {filteredData.map((insight, index) => (
           <motion.div
             key={insight.id}
-            className="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:shadow-md transition-all duration-300"
+            className="p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors border border-border/50"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
             <div className="flex items-start justify-between mb-2">
-              <h4 className="font-medium text-gray-900 dark:text-white">{insight.title}</h4>
-              <span className={`text-xs px-2 py-1 rounded-full ${getImpactColor(insight.impact)}`}>
+              <h4 className="font-medium text-foreground text-sm">{insight.title}</h4>
+              <span className={`text-xs px-2 py-0.5 rounded ${getImpactColor(insight.impact)}`}>
                 {insight.impact}
               </span>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{insight.description}</p>
+            <p className="text-sm text-muted-foreground mb-2">{insight.description}</p>
             <div className="flex items-center justify-between">
-              <span className={`text-xs px-2 py-1 rounded-full ${getCategoryColor(insight.category)}`}>
+              <span className={`text-xs px-2 py-0.5 rounded ${getCategoryColor(insight.category)}`}>
                 {insight.category}
               </span>
-              <span className="text-xs text-gray-500 dark:text-gray-400">
+              <span className="text-xs text-muted-foreground">
                 {formatTimeAgo(new Date(insight.createdAt!))}
               </span>
             </div>
