@@ -26,6 +26,7 @@ interface DashboardData {
 export default function Dashboard() {
   // For demo purposes, using a fixed user ID
   const userId = "demo-user";
+  const [isCompactMode, setIsCompactMode] = useState(false);
   
   const { data: user } = useQuery<User>({
     queryKey: ["/api/user/camila"],
@@ -89,6 +90,14 @@ export default function Dashboard() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsCompactMode(!isCompactMode)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                {isCompactMode ? "Expandir" : "Compacto"}
+              </Button>
               <ThemeToggle />
               <div className="relative">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent-emerald via-accent-cyan to-primary p-[2px]">

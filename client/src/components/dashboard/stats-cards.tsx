@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { GitCommit, Brain, Clock, BookOpen } from "lucide-react";
+import { StatsCardSkeleton } from "@/components/ui/skeleton-components";
 import type { DailyStats } from "@shared/schema";
 
 interface StatsCardsProps {
@@ -7,6 +8,40 @@ interface StatsCardsProps {
 }
 
 export function StatsCards({ data }: StatsCardsProps) {
+  if (!data) {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <StatsCardSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 24
+      }
+    }
+  };
+
   const cards = [
     {
       icon: GitCommit,
@@ -47,27 +82,24 @@ export function StatsCards({ data }: StatsCardsProps) {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+    <motion.div
+      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       {cards.map((card, index) => (
         <motion.div
           key={index}
           className="metric-card group relative"
-          initial={{ opacity: 0, y: 30, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ 
-            duration: 0.6, 
-            delay: card.delay,
-            type: "spring",
-            stiffness: 100,
-            damping: 10
-          }}
+          variants={itemVariants}
         >
           {/* Glow Effect */}
-          <div 
+          <div
             className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"
             style={{ backgroundColor: card.glowColor }}
           />
-          
+
           {/* Content */}
           <div className="relative z-10 flex flex-col h-full">
             {/* Header */}
@@ -82,7 +114,7 @@ export function StatsCards({ data }: StatsCardsProps) {
                   {card.emoji}
                 </div>
               </div>
-              
+
               {/* Decorative Corner */}
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-white/10 to-transparent border border-white/20" />
             </div>
@@ -95,12 +127,12 @@ export function StatsCards({ data }: StatsCardsProps) {
                 transition={{ duration: 0.4, delay: card.delay + 0.2 }}
               >
                 <div className="text-right mb-2">
-                  <motion.p 
+                  <motion.p
                     className="text-4xl font-black bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent"
                     initial={{ scale: 0.5 }}
                     animate={{ scale: 1 }}
-                    transition={{ 
-                      duration: 0.8, 
+                    transition={{
+                      duration: 0.8,
                       delay: card.delay + 0.3,
                       type: "spring",
                       stiffness: 200,
@@ -113,10 +145,10 @@ export function StatsCards({ data }: StatsCardsProps) {
                     {card.label}
                   </p>
                 </div>
-                
+
                 {/* Progress Line */}
                 <div className="w-full h-1 bg-muted rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     className={`h-full bg-gradient-to-r ${card.gradient} rounded-full`}
                     initial={{ width: 0 }}
                     animate={{ width: `${Math.min(parseFloat(card.value) * 20, 100)}%` }}
@@ -133,6 +165,6 @@ export function StatsCards({ data }: StatsCardsProps) {
           }} />
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }

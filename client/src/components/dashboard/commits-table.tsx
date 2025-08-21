@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { GitBranch, GitCommit, Search, Filter } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useState, useMemo } from "react";
+import { CommitsTableSkeleton } from "@/components/ui/skeleton-components";
 import type { Commit } from "@shared/schema";
 
 interface CommitsTableProps {
@@ -8,9 +13,26 @@ interface CommitsTableProps {
 }
 
 export function CommitsTable({ data = [] }: CommitsTableProps) {
-  const [selectedProject, setSelectedProject] = useState("All Projects");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterType, setFilterType] = useState<string>("all");
 
-  const projects = ["All Projects", "Ring Analytics Dashboard", "Harley Davidson CRM", "Internal Tools"];
+  const filteredCommits = useMemo(() => {
+    return data.filter(commit => {
+      const matchesSearch = commit.message.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          commit.branch.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesFilter = filterType === "all" || commit.branch === filterType;
+      return matchesSearch && matchesFilter;
+    });
+  }, [data, searchTerm, filterType]);
+
+  const branches = useMemo(() => {
+    const uniqueBranches = [...new Set(data.map(commit => commit.branch))];
+    return uniqueBranches;
+  }, [data]);
+
+  if (!data || data.length === 0) {
+    return <CommitsTableSkeleton />;
+  }
 
   const getImpactColor = (impact: string) => {
     switch (impact) {
@@ -28,19 +50,15 @@ export function CommitsTable({ data = [] }: CommitsTableProps) {
   const formatTimeAgo = (date: Date) => {
     const now = new Date();
     const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    
+
     if (diffInHours < 1) return "Less than an hour ago";
     if (diffInHours === 1) return "1 hour ago";
     if (diffInHours < 24) return `${diffInHours} hours ago`;
-    
+
     const diffInDays = Math.floor(diffInHours / 24);
     if (diffInDays === 1) return "1 day ago";
     return `${diffInDays} days ago`;
   };
-
-  const filteredData = selectedProject === "All Projects" 
-    ? data 
-    : data.filter(commit => commit.project === selectedProject);
 
   return (
     <motion.div
@@ -50,20 +68,32 @@ export function CommitsTable({ data = [] }: CommitsTableProps) {
       transition={{ duration: 0.5 }}
     >
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Recent Commits</h3>
-        <div className="flex items-center space-x-2">
-          {projects.map((project) => (
-            <Button
-              key={project}
-              variant={selectedProject === project ? "default" : "ghost"}
-              size="sm"
-              onClick={() => setSelectedProject(project)}
-              className={selectedProject === project ? "bg-primary text-white" : ""}
-            >
-              {project}
-            </Button>
-          ))}
+        <h3 className="text-2xl font-bold gradient-text">Recent Commits</h3>
+        <GitCommit className="w-8 h-8 text-primary animate-pulse-glow" />
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+          <Input
+            placeholder="Search commits or branches..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10 bg-glass-secondary border-white/10"
+          />
         </div>
+        <Select value={filterType} onValueChange={setFilterType}>
+          <SelectTrigger className="w-full sm:w-48 bg-glass-secondary border-white/10">
+            <Filter className="w-4 h-4 mr-2" />
+            <SelectValue placeholder="Filter by branch" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All branches</SelectItem>
+            {branches.map(branch => (
+              <SelectItem key={branch} value={branch}>{branch}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <div className="overflow-x-auto">
@@ -79,7 +109,7 @@ export function CommitsTable({ data = [] }: CommitsTableProps) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-            {filteredData.map((commit, index) => (
+            {filteredCommits.slice(0, 10).map((commit, index) => (
               <motion.tr
                 key={commit.id}
                 className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
@@ -102,7 +132,7 @@ export function CommitsTable({ data = [] }: CommitsTableProps) {
                 <td className="py-3 px-4">
                   <div className="flex items-center space-x-2">
                     <div className="w-8 h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
-                      <div 
+                      <div
                         className="h-full bg-gradient-to-r from-primary to-accent-emerald rounded-full"
                         style={{ width: `${(commit.valueScore / 10) * 100}%` }}
                       ></div>
