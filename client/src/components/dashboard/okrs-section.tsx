@@ -22,38 +22,37 @@ export function OKRsSection({ data = [] }: OKRsSectionProps) {
 
   return (
     <motion.div
-      className="glass-card rounded-xl p-6 floating-card"
+      className="bg-white/80 dark:bg-gray-800/80 glass-effect rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className="text-lg font-semibold text-foreground mb-4">Objectives & Key Results</h3>
+      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Objectives & Key Results</h3>
       
-      <div className="space-y-4">
+      <div className="space-y-6">
         {data.map((okr, index) => (
           <motion.div
             key={okr.id}
-            className="p-3 rounded-lg bg-muted/30"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
             <div className="flex items-center justify-between mb-2">
-              <h4 className="font-medium text-foreground text-sm">{okr.title}</h4>
-              <span className="text-xs font-medium text-primary">
+              <h4 className="font-medium text-gray-900 dark:text-white">{okr.title}</h4>
+              <span className={`text-sm font-medium ${getProgressText(okr.progress)}`}>
                 {okr.progress}% Complete
               </span>
             </div>
-            <p className="text-xs text-muted-foreground mb-2">{okr.category}</p>
-            <div className="w-full bg-muted rounded-full h-1.5 mb-2">
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{okr.category}</p>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-2">
               <motion.div 
-                className={`h-1.5 rounded-full bg-gradient-to-r ${getProgressColor(okr.progress)}`}
+                className={`h-2 rounded-full bg-gradient-to-r ${getProgressColor(okr.progress)}`}
                 initial={{ width: 0 }}
                 animate={{ width: `${okr.progress}%` }}
                 transition={{ duration: 1, delay: index * 0.2 }}
               />
             </div>
-            <p className="text-xs text-muted-foreground">Target: {okr.target}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Target: {okr.target}</p>
           </motion.div>
         ))}
       </div>

@@ -29,29 +29,29 @@ export function SettingsProfile({ user, integrations = [] }: SettingsProfileProp
 
   return (
     <motion.div
-      className="glass-card rounded-xl p-6 floating-card"
+      className="bg-white/80 dark:bg-gray-800/80 glass-effect rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className="text-lg font-semibold text-foreground mb-4">Settings & Profile</h3>
+      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Settings & Profile</h3>
       
-      <div className="space-y-4">
+      <div className="space-y-6">
         <div>
-          <h4 className="font-medium text-foreground mb-2 text-sm">Personal Preferences</h4>
-          <div className="space-y-2">
+          <h4 className="font-medium text-gray-900 dark:text-white mb-3">Personal Preferences</h4>
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-muted-foreground">Theme</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">Theme</span>
               <div className="flex items-center space-x-1">
-                <button className="px-2 py-1 text-xs gradient-bg text-white rounded">Auto</button>
-                <button className="px-2 py-1 text-xs text-muted-foreground">Light</button>
-                <button className="px-2 py-1 text-xs text-muted-foreground">Dark</button>
+                <button className="px-2 py-1 text-xs bg-primary text-white rounded">Auto</button>
+                <button className="px-2 py-1 text-xs text-gray-600 dark:text-gray-400">Light</button>
+                <button className="px-2 py-1 text-xs text-gray-600 dark:text-gray-400">Dark</button>
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <span className="text-xs text-muted-foreground">Timezone</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">Timezone</span>
               <Select defaultValue={user?.timezone || "America/Montevideo"}>
-                <SelectTrigger className="w-auto h-7 text-xs">
+                <SelectTrigger className="w-auto">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -65,12 +65,12 @@ export function SettingsProfile({ user, integrations = [] }: SettingsProfileProp
         </div>
 
         <div>
-          <h4 className="font-medium text-foreground mb-2 text-sm">Integration Status</h4>
-          <div className="space-y-1">
+          <h4 className="font-medium text-gray-900 dark:text-white mb-3">Integration Status</h4>
+          <div className="space-y-2">
             {integrations.map((integration) => (
               <div key={integration.id} className="flex items-center justify-between">
-                <span className="text-xs text-muted-foreground">{integration.name}</span>
-                <span className={`text-xs px-1.5 py-0.5 rounded ${getStatusColor(integration.status)}`}>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{integration.name}</span>
+                <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(integration.status)}`}>
                   {integration.status}
                 </span>
               </div>
@@ -79,8 +79,8 @@ export function SettingsProfile({ user, integrations = [] }: SettingsProfileProp
         </div>
 
         <div>
-          <h4 className="font-medium text-foreground mb-2 text-sm">Performance Stats</h4>
-          <div className="space-y-1">
+          <h4 className="font-medium text-gray-900 dark:text-white mb-3">Performance Stats</h4>
+          <div className="space-y-2">
             {performanceStats.map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -89,8 +89,8 @@ export function SettingsProfile({ user, integrations = [] }: SettingsProfileProp
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                <span className="text-xs text-muted-foreground">{stat.label}</span>
-                <span className="text-xs font-medium text-foreground">{stat.value}</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</span>
+                <span className="text-sm font-medium text-gray-900 dark:text-white">{stat.value}</span>
               </motion.div>
             ))}
           </div>

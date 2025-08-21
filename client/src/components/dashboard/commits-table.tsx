@@ -44,21 +44,21 @@ export function CommitsTable({ data = [] }: CommitsTableProps) {
 
   return (
     <motion.div
-      className="glass-card rounded-xl p-6 floating-card"
+      className="bg-white/80 dark:bg-gray-800/80 glass-effect rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-foreground">Recent Commits</h3>
-        <div className="flex items-center space-x-1">
+      <div className="flex items-center justify-between mb-6">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Recent Commits</h3>
+        <div className="flex items-center space-x-2">
           {projects.map((project) => (
             <Button
               key={project}
               variant={selectedProject === project ? "default" : "ghost"}
               size="sm"
               onClick={() => setSelectedProject(project)}
-              className={`text-xs h-7 ${selectedProject === project ? "gradient-bg text-white shadow-md" : "text-muted-foreground"}`}
+              className={selectedProject === project ? "bg-primary text-white" : ""}
             >
               {project}
             </Button>
@@ -66,47 +66,59 @@ export function CommitsTable({ data = [] }: CommitsTableProps) {
         </div>
       </div>
 
-      <div className="space-y-2">
-        {filteredData.map((commit, index) => (
-          <motion.div
-            key={commit.id}
-            className="flex items-center justify-between p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
-          >
-            <div className="flex items-center space-x-3 flex-1">
-              <code className="text-xs bg-muted rounded px-2 py-1 text-muted-foreground">
-                {commit.hash}
-              </code>
-              <div className="flex-1">
-                <p className="text-sm font-medium text-foreground">{commit.message}</p>
-                <div className="flex items-center space-x-2 mt-1">
-                  <span className="text-xs text-muted-foreground">{commit.project}</span>
-                  <span className={`px-2 py-0.5 text-xs rounded ${getImpactColor(commit.impact)}`}>
+      <div className="overflow-x-auto">
+        <table className="w-full">
+          <thead className="border-b border-gray-200 dark:border-gray-700">
+            <tr>
+              <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Hash</th>
+              <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Message</th>
+              <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Project</th>
+              <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Impact</th>
+              <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Value Score</th>
+              <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Time</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+            {filteredData.map((commit, index) => (
+              <motion.tr
+                key={commit.id}
+                className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <td className="py-3 px-4">
+                  <code className="text-xs bg-gray-100 dark:bg-gray-700 rounded px-2 py-1">
+                    {commit.hash}
+                  </code>
+                </td>
+                <td className="py-3 px-4 text-gray-900 dark:text-white">{commit.message}</td>
+                <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">{commit.project}</td>
+                <td className="py-3 px-4">
+                  <span className={`px-2 py-1 text-xs rounded-full ${getImpactColor(commit.impact)}`}>
                     {commit.impact}
                   </span>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center space-x-2">
-                <div className="w-6 h-1.5 bg-muted rounded-full">
-                  <div 
-                    className="h-full progress-bar rounded-full"
-                    style={{ width: `${(commit.valueScore / 10) * 100}%` }}
-                  ></div>
-                </div>
-                <span className="text-xs font-medium text-foreground">
-                  {commit.valueScore}
-                </span>
-              </div>
-              <span className="text-xs text-muted-foreground">
-                {formatTimeAgo(new Date(commit.createdAt!))}
-              </span>
-            </div>
-          </motion.div>
-        ))}
+                </td>
+                <td className="py-3 px-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
+                      <div 
+                        className="h-full bg-gradient-to-r from-primary to-accent-emerald rounded-full"
+                        style={{ width: `${(commit.valueScore / 10) * 100}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900 dark:text-white">
+                      {commit.valueScore}
+                    </span>
+                  </div>
+                </td>
+                <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
+                  {formatTimeAgo(new Date(commit.createdAt!))}
+                </td>
+              </motion.tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </motion.div>
   );

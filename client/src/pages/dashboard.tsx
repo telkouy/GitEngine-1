@@ -14,7 +14,7 @@ import { SettingsProfile } from "@/components/dashboard/settings-profile";
 export default function Dashboard() {
   // For demo purposes, using a fixed user ID
   const userId = "demo-user";
-
+  
   const { data: user } = useQuery({
     queryKey: ["/api/user/camila"],
   });
@@ -22,8 +22,6 @@ export default function Dashboard() {
   const { data: dashboardData, isLoading } = useQuery({
     queryKey: ["/api/dashboard", userId],
   });
-
-  const userData = user as any;
 
   if (isLoading) {
     return (
@@ -50,7 +48,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-
+            
             <div className="flex items-center space-x-4">
               <ThemeToggle />
               <div className="w-10 h-10 bg-gradient-to-r from-accent-emerald to-accent-cyan rounded-full flex items-center justify-center">
@@ -64,31 +62,17 @@ export default function Dashboard() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Welcome Section */}
         <motion.div 
-          className="mb-8 bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700"
+          className="mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                Welcome back, {user?.name || 'Camila'}
-              </h2>
-              <p className="text-gray-500 dark:text-gray-400">
-                Here's your development overview for today
-              </p>
-            </div>
-            <div className="text-right">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {new Date().toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </p>
-            </div>
-          </div>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            Welcome back, {user?.name || 'Camila'}!
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 italic">
+            "Move fast, learn faster. - Susan"
+          </p>
         </motion.div>
 
         {/* Stats Cards */}

@@ -39,28 +39,28 @@ export function Achievements({ data = [] }: AchievementsProps) {
 
   return (
     <motion.div
-      className="glass-card rounded-xl p-6 floating-card"
+      className="bg-white/80 dark:bg-gray-800/80 glass-effect rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className="text-lg font-semibold text-foreground mb-4">Recent Achievements</h3>
+      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Recent Achievements</h3>
       
-      <div className="space-y-3">
+      <div className="space-y-4">
         {data.map((achievement, index) => (
           <motion.div
             key={achievement.id}
-            className="flex items-center space-x-3 p-3 rounded-lg bg-muted/30 border border-border/50"
+            className={`flex items-center space-x-4 p-4 rounded-xl border ${getAchievementColor(index)}`}
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
-            <div className="text-xl">{achievement.icon}</div>
+            <div className="text-2xl">{achievement.icon}</div>
             <div className="flex-1">
-              <h4 className="font-medium text-foreground text-sm">{achievement.title}</h4>
-              <p className="text-xs text-muted-foreground">{achievement.description}</p>
+              <h4 className="font-medium text-gray-900 dark:text-white">{achievement.title}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{achievement.description}</p>
             </div>
-            <span className="text-xs px-2 py-1 rounded bg-muted text-muted-foreground">
+            <span className={`text-xs px-2 py-1 rounded-full ${getBadgeColor(index)}`}>
               {formatTimeAgo(new Date(achievement.unlockedAt!))}
             </span>
           </motion.div>

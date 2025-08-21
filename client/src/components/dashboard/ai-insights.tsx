@@ -83,23 +83,20 @@ export function AIInsights({ data = [], userId }: AIInsightsProps) {
 
   return (
     <motion.div
-      className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm"
+      className="bg-white/80 dark:bg-gray-800/80 glass-effect rounded-2xl p-6 border border-gray-200/20 dark:border-gray-700/20"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">AI Insights</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Intelligent development recommendations</p>
-        </div>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">AI Insights Engine</h3>
         <Button
           onClick={() => generateInsightMutation.mutate()}
           disabled={generateInsightMutation.isPending}
-          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm hover:shadow-lg transition-all duration-300"
+          className="bg-gradient-to-r from-primary to-primary-light text-white text-sm hover:shadow-lg transition-all duration-300"
         >
           <Sparkles className="w-4 h-4 mr-2" />
-          {generateInsightMutation.isPending ? "Generating..." : "Generate Insight"}
+          {generateInsightMutation.isPending ? "Generating..." : "Generate New Insight"}
         </Button>
       </div>
 
