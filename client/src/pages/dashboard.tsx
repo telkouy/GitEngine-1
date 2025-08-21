@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Zap } from "lucide-react";
@@ -31,7 +31,7 @@ export default function Dashboard() {
   // For demo purposes, using a fixed user ID
   const userId = "demo-user";
   const [isCompactMode, setIsCompactMode] = useState(false);
-  
+
   const { data: user } = useQuery<User>({
     queryKey: ["/api/user/camila"],
   });
@@ -59,7 +59,7 @@ export default function Dashboard() {
         <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/5" />
         <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(139,92,246,0.1),transparent_50%)]" />
         <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.1),transparent_50%)]" />
-        
+
         {/* Floating Elements */}
         <div className="fixed top-20 left-10 w-2 h-2 bg-primary/40 rounded-full animate-float" />
         <div className="fixed top-40 right-20 w-1 h-1 bg-accent-cyan/60 rounded-full animate-float" style={{ animationDelay: '2s' }} />
@@ -92,7 +92,7 @@ export default function Dashboard() {
                   <p className="text-xs text-muted-foreground font-medium">Command Center</p>
                 </div>
               </motion.div>
-              
+
               <motion.div 
                 className="flex items-center space-x-4"
                 initial={{ opacity: 0, x: 20 }}
