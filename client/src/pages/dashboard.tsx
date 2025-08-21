@@ -4,6 +4,8 @@ import { Zap } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { NextSteps } from "@/components/dashboard/next-steps";
 import { CommitsTable } from "@/components/dashboard/commits-table";
@@ -51,70 +53,74 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/5" />
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(139,92,246,0.1),transparent_50%)]" />
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.1),transparent_50%)]" />
-      
-      {/* Floating Elements */}
-      <div className="fixed top-20 left-10 w-2 h-2 bg-primary/40 rounded-full animate-float" />
-      <div className="fixed top-40 right-20 w-1 h-1 bg-accent-cyan/60 rounded-full animate-float" style={{ animationDelay: '2s' }} />
-      <div className="fixed bottom-40 left-20 w-3 h-3 bg-accent-emerald/30 rounded-full animate-float" style={{ animationDelay: '4s' }} />
+    <SidebarProvider>
+      <div className="min-h-screen flex relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="fixed inset-0 bg-gradient-to-br from-background via-background to-accent/5" />
+        <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(139,92,246,0.1),transparent_50%)]" />
+        <div className="fixed inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.1),transparent_50%)]" />
+        
+        {/* Floating Elements */}
+        <div className="fixed top-20 left-10 w-2 h-2 bg-primary/40 rounded-full animate-float" />
+        <div className="fixed top-40 right-20 w-1 h-1 bg-accent-cyan/60 rounded-full animate-float" style={{ animationDelay: '2s' }} />
+        <div className="fixed bottom-40 left-20 w-3 h-3 bg-accent-emerald/30 rounded-full animate-float" style={{ animationDelay: '4s' }} />
 
-      {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-glass-dark border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <motion.div 
-              className="flex items-center space-x-4"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="relative">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary via-accent-violet to-accent-cyan p-[2px]">
-                  <div className="w-full h-full rounded-[14px] bg-background flex items-center justify-center">
-                    <Zap className="w-6 h-6 text-primary animate-pulse-glow" />
-                  </div>
-                </div>
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary via-accent-violet to-accent-cyan opacity-20 blur-md" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold gradient-text">Vibe Coder</h1>
-                <p className="text-sm text-muted-foreground font-medium">Force of Nature - Command Center</p>
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              className="flex items-center space-x-6"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsCompactMode(!isCompactMode)}
-                className="text-muted-foreground hover:text-foreground"
+        {/* Sidebar */}
+        <AppSidebar />
+
+        <SidebarInset className="flex flex-col">
+          {/* Header */}
+          <header className="sticky top-0 z-50 backdrop-blur-xl bg-glass-dark border-b border-white/10">
+            <div className="flex items-center justify-between px-6 py-4">
+              <motion.div 
+                className="flex items-center space-x-4"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
               >
-                {isCompactMode ? "Expandir" : "Compacto"}
-              </Button>
-              <ThemeToggle />
-              <div className="relative">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent-emerald via-accent-cyan to-primary p-[2px]">
-                  <div className="w-full h-full rounded-full bg-gradient-to-br from-accent-emerald/20 to-primary/20 flex items-center justify-center backdrop-blur-sm">
-                    <span className="text-white font-bold text-lg">C</span>
+                <SidebarTrigger className="mr-2" />
+                <div className="relative lg:hidden">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-accent-violet to-accent-cyan p-[2px]">
+                    <div className="w-full h-full rounded-[8px] bg-background flex items-center justify-center">
+                      <Zap className="w-5 h-5 text-primary animate-pulse-glow" />
+                    </div>
                   </div>
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary via-accent-violet to-accent-cyan opacity-20 blur-sm" />
                 </div>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent-emerald via-accent-cyan to-primary opacity-40 blur-md animate-pulse-glow" />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </header>
+                <div className="lg:hidden">
+                  <h1 className="text-xl font-bold gradient-text">Vibe Coder</h1>
+                  <p className="text-xs text-muted-foreground font-medium">Command Center</p>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="flex items-center space-x-4"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setIsCompactMode(!isCompactMode)}
+                  className="text-muted-foreground hover:text-foreground hidden sm:flex"
+                >
+                  {isCompactMode ? "Expandir" : "Compacto"}
+                </Button>
+                <ThemeToggle />
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-emerald via-accent-cyan to-primary p-[2px]">
+                    <div className="w-full h-full rounded-full bg-gradient-to-br from-accent-emerald/20 to-primary/20 flex items-center justify-center backdrop-blur-sm">
+                      <span className="text-white font-bold text-sm">C</span>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent-emerald via-accent-cyan to-primary opacity-40 blur-sm animate-pulse-glow" />
+                </div>
+              </motion.div>
+            </div>
+          </header>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-6 py-8 space-y-8">
+          <main className="flex-1 relative z-10 px-6 py-8 space-y-8 overflow-auto">
         {/* Hero Welcome Section */}
         <motion.div 
           className="relative"
@@ -168,7 +174,9 @@ export default function Dashboard() {
             />
           </div>
         </div>
-      </main>
+        </main>
+      </SidebarInset>
     </div>
+  </SidebarProvider>
   );
 }
