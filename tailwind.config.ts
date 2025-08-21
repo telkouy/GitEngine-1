@@ -31,6 +31,7 @@ export default {
           DEFAULT: "var(--primary)",
           foreground: "var(--primary-foreground)",
           light: "var(--primary-light)",
+          dark: "var(--primary-dark)",
         },
         secondary: {
           DEFAULT: "var(--secondary)",
@@ -46,6 +47,8 @@ export default {
           cyan: "var(--accent-cyan)",
           emerald: "var(--accent-emerald)",
           amber: "var(--accent-amber)",
+          pink: "var(--accent-pink)",
+          violet: "var(--accent-violet)",
         },
         destructive: {
           DEFAULT: "var(--destructive)",
@@ -54,24 +57,9 @@ export default {
         border: "var(--border)",
         input: "var(--input)",
         ring: "var(--ring)",
-        chart: {
-          "1": "var(--chart-1)",
-          "2": "var(--chart-2)",
-          "3": "var(--chart-3)",
-          "4": "var(--chart-4)",
-          "5": "var(--chart-5)",
-        },
-        sidebar: {
-          DEFAULT: "var(--sidebar-background)",
-          foreground: "var(--sidebar-foreground)",
-          primary: "var(--sidebar-primary)",
-          "primary-foreground": "var(--sidebar-primary-foreground)",
-          accent: "var(--sidebar-accent)",
-          "accent-foreground": "var(--sidebar-accent-foreground)",
-          border: "var(--sidebar-border)",
-          ring: "var(--sidebar-ring)",
-        },
         glass: {
+          primary: "var(--glass-primary)",
+          secondary: "var(--glass-secondary)",
           light: "var(--glass-light)",
           dark: "var(--glass-dark)",
         },
@@ -79,9 +67,16 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fadeIn 0.5s ease-out",
-        "slide-up": "slideUp 0.3s ease-out",
-        "pulse-slow": "pulse 3s ease-in-out infinite",
+        "fade-in": "fadeIn 0.6s ease-out",
+        "slide-up": "slideUp 0.4s ease-out",
+        "slide-in-right": "slideInRight 0.5s ease-out",
+        "bounce-in": "bounceIn 0.8s ease-out",
+        "pulse-glow": "pulseGlow 2s ease-in-out infinite",
+        "gradient-shift": "gradientShift 3s ease-in-out infinite",
+        "holographic": "holographicShift 8s ease-in-out infinite",
+        "float": "float 6s ease-in-out infinite",
+        "typewriter": "typewriter 4s steps(40, end)",
+        "blink-caret": "blink-caret 0.75s step-end infinite",
       },
       keyframes: {
         "accordion-down": {

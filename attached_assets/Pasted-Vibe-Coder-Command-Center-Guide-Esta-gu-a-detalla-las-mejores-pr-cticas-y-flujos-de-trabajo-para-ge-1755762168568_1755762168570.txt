@@ -1,0 +1,89 @@
+Vibe Coder Command Center Guide
+Esta guía detalla las mejores prácticas y flujos de trabajo para gestionar tu rol de Vibe Coder con la aplicación Vibe Coder Command Center.
+
+1. Mapeo Visual de Componentes con Mermaid
+Utiliza diagramas para visualizar relaciones y flujos de datos entre módulos clave:
+
+text
+flowchart TD
+  A[GitHub API] -->|Commits data| B(Commits Feed)
+  B -->|Value scoring| C(Insights Engine)
+  C -->|Insights| D(Dashboard)
+  E[Doc Processor] -->|Metadata| F(Docs Hub)
+  F -->|Status| D
+  D -->|Progress metrics| G[OKRs Tracker]
+  H[User Actions] --> B
+  H --> F
+  H --> C
+  D --> I[Slack Bot]
+  I --> H
+GitHub API alimenta el feed de commits
+
+Insights Engine analiza commits y documentación
+
+Dashboard agrega métricas y genera gráficos
+
+OKRs Tracker muestra el progreso de objetivos
+
+Slack Bot notifica actualizaciones de forma async
+
+2. Estrategia de Documentación Detallada
+Mantén siempre actualizada la carpeta /Docs con:
+
+Descripción de cada componente principal
+
+Funcionalidad y uso independiente de módulos
+
+Diagramas Mermaid embebidos en Markdown
+
+Ejemplos de consumo de APIs y fragmentos de código
+
+Guías paso a paso para features clave
+
+Mejor práctica: Actualiza la documentación en cada PR y genera un changelog automático.
+
+3. Conversaciones Focalizadas
+Crea un canal o carpeta Chatlog/ para cada tema
+
+Guarda resúmenes de discusiones importantes en Markdown
+
+Enlaces cruzados: vincula el Chatlog con la sección de Docs relevante
+
+Mantén el contexto breve para mejorar la calidad de respuestas AI
+
+4. Uso Estratégico de Modelos AI
+Modelos de Razonamiento: para planificación de arquitectura y revisión de diseño
+
+Modelos de Instrucción: para generación de código, refactorizaciones y tareas repetitivas
+
+5. Gestión de Memoria
+Registra descubrimientos y decisiones en Memory.md
+
+Revisa y actualiza su contenido tras sesiones de brainstorming o hallazgos críticos
+
+Usa la memoria para ajustar prompts y mantener la coherencia del proyecto
+
+6. Sistema de Checkpoints
+Crea un folder /Checkpoints en tu repo
+
+Guarda snapshots con timestamps: checkpoint_YYYYMMDD_HHMM.md
+
+Documenta cambios clave entre checkpoints
+
+Facilita el rollback cuando necesites revertir a una versión estable
+
+Resumen de Best Practices
+Documentación Visual: Diagramas Mermaid para arquitecturas
+
+Docs Completos: Markdown detallado para cada módulo
+
+Desarrollo Focalizado: Tareas pequeñas y bien definidas
+
+AI Inteligente: Escoge el modelo adecuado para cada fase
+
+Memoria Activa: Registra y refina insights constantemente
+
+Control de Versiones: Checkpoints frecuentes y bien documentados
+
+Mantén esta guía actualizada a medida que tu flujo evolucione y nuevas prácticas emergentes se adopten.
+
