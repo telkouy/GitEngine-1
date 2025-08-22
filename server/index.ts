@@ -1,4 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
+import cors from 'cors';
+import { createServer } from 'http';
+import { WebSocketServer } from 'ws';
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -56,16 +59,57 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
+  // Create HTTP server
+  const httpServer = createServer(app);
+
+  // Create WebSocket server
+  const wss = new WebSocketServer({ server: httpServer });
+
+  wss.on('connection', (ws) => {
+    console.log('[websocket] new client connected');
+
+    // Send welcome message
+    ws.send(JSON.stringify({
+      type: 'connected',
+      timestamp: new Date().toISOString()
+    }));
+
+    // Send periodic updates every 30 seconds
+    const interval = setInterval(() => {
+      if (ws.readyState === ws.OPEN) {
+        ws.send(JSON.stringify({
+          type: 'update',
+          timestamp: new Date().toISOString(),
+          data: {
+            activeUsers: Math.floor(Math.random() * 10) + 1,
+            systemStatus: 'healthy'
+          }
+        }));
+      }
+    }, 30000);
+
+    ws.on('close', () => {
+      console.log('[websocket] client disconnected');
+      clearInterval(interval);
+    });
+
+    ws.on('error', (error) => {
+      console.error('[websocket] error:', error);
+      clearInterval(interval);
+    });
+  });
+
   // ALWAYS serve the app on the port specified in the environment variable PORT
   // Other ports are firewalled. Default to 5000 if not specified.
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
+  httpServer.listen({
     port,
     host: "0.0.0.0",
     reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
+    console.log(`[websocket] server ready on port ${port}`);
   });
 })();

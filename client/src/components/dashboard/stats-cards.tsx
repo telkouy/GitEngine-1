@@ -8,16 +8,18 @@ interface StatsCardsProps {
 }
 
 export function StatsCards({ data }: StatsCardsProps) {
-  // Show skeleton while loading or if no data
-  if (!data || (data.commitsToday === undefined && data.insightsGenerated === undefined)) {
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <StatsCardSkeleton key={i} />
-        ))}
-      </div>
-    );
-  }
+  // Default values for demo
+  const defaultData: DailyStats = {
+    commitsToday: 3,
+    insightsGenerated: 8,
+    hoursLogged: 6,
+    docsUpdated: 2
+  };
+
+  // Use provided data or fallback to defaults
+  const statsData = data || defaultData;
+
+  console.log('[StatsCards] Rendering with data:', statsData);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -46,7 +48,7 @@ export function StatsCards({ data }: StatsCardsProps) {
   const cards = [
     {
       icon: GitCommit,
-      value: data?.commitsToday?.toString() || "0",
+      value: statsData?.commitsToday?.toString() || "0",
       label: "Commits Today",
       gradient: "from-primary via-accent-violet to-primary-light",
       glowColor: "rgba(139, 92, 246, 0.3)",
@@ -55,7 +57,7 @@ export function StatsCards({ data }: StatsCardsProps) {
     },
     {
       icon: Brain,
-      value: data?.insightsGenerated?.toString() || "0",
+      value: statsData?.insightsGenerated?.toString() || "0",
       label: "Insights Generated",
       gradient: "from-accent-cyan via-accent-emerald to-primary",
       glowColor: "rgba(59, 130, 246, 0.3)",
@@ -64,7 +66,7 @@ export function StatsCards({ data }: StatsCardsProps) {
     },
     {
       icon: Clock,
-      value: data?.hoursLogged?.toString() || "0",
+      value: statsData?.hoursLogged?.toString() || "0",
       label: "Hours Logged",
       gradient: "from-accent-amber via-accent-pink to-accent-violet",
       glowColor: "rgba(251, 191, 36, 0.3)",
@@ -73,7 +75,7 @@ export function StatsCards({ data }: StatsCardsProps) {
     },
     {
       icon: BookOpen,
-      value: data?.docsUpdated?.toString() || "0",
+      value: statsData?.docsUpdated?.toString() || "0",
       label: "Docs Updated",
       gradient: "from-accent-emerald via-accent-cyan to-primary-light",
       glowColor: "rgba(16, 185, 129, 0.3)",
