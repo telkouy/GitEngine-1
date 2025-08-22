@@ -150,7 +150,7 @@ export default function Dashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                Welcome back, {user?.name || 'Camila'}!
+                Welcome back, {user?.name || 'Demo User'}!
               </motion.h2>
               <motion.p 
                 className="text-xl text-muted-foreground italic font-medium"
