@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -17,6 +16,7 @@ import GitIntegration from "@/pages/git-integration";
 import OKRs from "@/pages/okrs";
 import Achievements from "@/pages/achievements";
 import Documentation from "@/pages/documentation";
+import AIAutoDocsPage from "@/pages/ai-auto-docs"; // Assuming this is the new page
 import Settings from "@/pages/settings";
 import NotFound from "@/pages/not-found";
 
@@ -41,6 +41,7 @@ function App() {
               <Route path="/okrs" element={<OKRs />} />
               <Route path="/achievements" element={<Achievements />} />
               <Route path="/docs" element={<Documentation />} />
+              <Route path="/ai-auto-docs" element={<AIAutoDocsPage />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

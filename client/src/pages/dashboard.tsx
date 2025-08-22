@@ -19,6 +19,7 @@ import { AIInsights } from "@/components/dashboard/ai-insights";
 import { OKRsSection } from "@/components/dashboard/okrs-section";
 import { Achievements } from "@/components/dashboard/achievements";
 import { SettingsProfile } from "@/components/dashboard/settings-profile";
+import { AIAutoDocs } from "@/components/dashboard/ai-auto-docs";
 import type { User, DailyStats, Commit, Insight, Documentation, OKR, Achievement, Integration, NextStep } from "@shared/schema";
 
 interface DashboardData {
@@ -166,7 +167,7 @@ export default function Dashboard() {
             </div>
           </header>
 
-          <main className="flex-1 relative z-10 px-6 py-8 space-y-8 overflow-auto">
+          <main className="flex-1 relative z-10 px-6 py-8 overflow-auto">
         {/* Hero Welcome Section */}
         <motion.div 
           className="relative"
@@ -204,9 +205,14 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
           {/* Left Column - Main Content */}
           <div className="xl:col-span-8 space-y-8">
-            <NextSteps data={dashboardData?.nextSteps} />
-            <CommitsTable data={dashboardData?.commits} />
+            {/* AI Auto-Generated Documentation */}
+            <AIAutoDocs userId={userId} />
+
+            {/* Documentation Hub */}
             <DocumentationHub data={dashboardData?.documentation} userId={userId} />
+
+            {/* Next Steps */}
+            <NextSteps data={dashboardData?.nextSteps} userId={userId} />
           </div>
 
           {/* Right Column - Sidebar */}

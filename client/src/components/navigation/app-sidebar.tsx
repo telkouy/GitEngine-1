@@ -89,7 +89,7 @@ export function AppSidebar() {
   const pendingReviews = dashboardData?.commits?.filter(commit => 
     commit.createdAt && new Date(commit.createdAt).getTime() > Date.now() - (24 * 60 * 60 * 1000) // Last 24 hours
   ).length || 0;
-  
+
   const activeOKRs = dashboardData?.okrs?.filter(okr => okr.progress < 100).length || 0;
   const recentInsights = dashboardData?.insights?.filter(insight =>
     insight.createdAt && new Date(insight.createdAt).getTime() > Date.now() - (7 * 24 * 60 * 60 * 1000) // Last 7 days
@@ -97,8 +97,11 @@ export function AppSidebar() {
   const recentAchievements = dashboardData?.achievements?.filter(achievement =>
     achievement.unlockedAt && new Date(achievement.unlockedAt).getTime() > Date.now() - (7 * 24 * 60 * 60 * 1000) // Last 7 days
   ).length || 0;
-  
+
   const notifications = recentInsights + recentAchievements;
+
+  // Dummy data for docsCount to show badge, replace with actual API call
+  const docsCount = 5; 
 
   // Dynamic navigation items with real data  
   const navigationItems: NavGroup[] = [
@@ -168,8 +171,19 @@ export function AppSidebar() {
       items: [
         {
           title: "Documentation",
-          url: "/docs",
+          url: "/documentation",
           icon: BookOpen,
+          badge: docsCount > 0 ? docsCount.toString() : undefined,
+          subItems: [
+            {
+              title: "AI Auto-Generated",
+              url: "/ai-auto-docs",
+            },
+            {
+              title: "Manual Docs",
+              url: "/documentation",
+            },
+          ],
         },
         {
           title: "Settings",
@@ -217,7 +231,7 @@ export function AppSidebar() {
         >
           <div className="relative">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-primary via-accent-violet to-accent-cyan p-[1px]">
-              <div className="w-full h-full rounded-[11px] bg-background flex items-center justify-center">
+              <div className="w-full h-full rounded-xl bg-background flex items-center justify-center">
                 <Zap className="w-4 h-4 text-primary" />
               </div>
             </div>
