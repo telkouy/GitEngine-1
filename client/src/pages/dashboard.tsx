@@ -36,13 +36,17 @@ export default function Dashboard() {
   // For demo purposes, using a fixed user ID
   const userId = "demo-user";
   const [isCompactMode, setIsCompactMode] = useState(false);
-  
+
   // WebSocket connection for real-time updates
   const { isConnected, lastMessage } = useWebSocket('ws://localhost:5000');
 
-  const { data: user } = useQuery<User>({
-    queryKey: ["/api/user/camila"],
-  });
+  const { data: user } = useQuery({
+      queryKey: ['user', 'demo'],
+      queryFn: async () => {
+        const response = await fetch('/api/user/demo');
+        return response.json();
+      },
+    });
 
   const { data: dashboardData, isLoading } = useQuery<DashboardData>({
     queryKey: ["/api/dashboard", userId],
@@ -154,7 +158,7 @@ export default function Dashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                "Move fast, learn faster. - Susan"
+                "Move fast, learn faster. - A teammate"
               </motion.p>
             </div>
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-primary/20 to-transparent rounded-full blur-3xl" />
