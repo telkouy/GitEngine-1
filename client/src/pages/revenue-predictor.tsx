@@ -36,7 +36,7 @@ export default function RevenuePredictorPage() {
                 </div>
                 <CardTitle className="text-2xl gradient-text">Revenue Predictor</CardTitle>
                 <p className="text-muted-foreground mt-2">
-                  IA que predice el futuro de tus ingresos con precisión extrema 💰
+                  AI that predicts your revenue future with extreme precision 💰
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -65,7 +65,7 @@ export default function RevenuePredictorPage() {
                 <div className="flex justify-center pt-4">
                   <Button disabled className="gap-2">
                     <Sparkles className="w-4 h-4" />
-                    Calculando el futuro...
+                    Calculating the future...
                   </Button>
                 </div>
               </CardContent>

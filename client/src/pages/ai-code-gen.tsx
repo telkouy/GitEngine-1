@@ -36,7 +36,7 @@ export default function AICodeGenPage() {
                 </div>
                 <CardTitle className="text-2xl gradient-text">AI Code Generator</CardTitle>
                 <p className="text-muted-foreground mt-2">
-                  La IA más épica está llegando para revolucionar tu código 🔥
+                  The most epic AI is coming to revolutionize your code 🔥
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -65,7 +65,7 @@ export default function AICodeGenPage() {
                 <div className="flex justify-center pt-4">
                   <Button disabled className="gap-2">
                     <Sparkles className="w-4 h-4" />
-                    Entrenando la IA...
+                    Training the AI...
                   </Button>
                 </div>
               </CardContent>
