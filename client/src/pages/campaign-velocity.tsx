@@ -1,4 +1,3 @@
-
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { CampaignVelocityEngine } from "@/components/dashboard/campaign-velocity-engine";
@@ -19,7 +18,7 @@ export default function CampaignVelocityPage() {
                   </p>
                 </div>
               </div>
-              
+
               <CampaignVelocityEngine />
             </div>
           </main>

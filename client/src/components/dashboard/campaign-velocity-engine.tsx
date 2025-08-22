@@ -1,14 +1,13 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Zap, 
-  Clock, 
-  TrendingUp, 
-  Target, 
-  Rocket, 
-  CheckCircle, 
-  AlertCircle, 
+import {
+  Zap,
+  Clock,
+  TrendingUp,
+  Target,
+  Rocket,
+  CheckCircle,
+  AlertCircle,
   PlayCircle,
   Settings,
   BarChart3,
@@ -96,8 +95,8 @@ export function CampaignVelocityEngine() {
 
   const velocityMetrics: VelocityMetrics = useMemo(() => {
     const completedCampaigns = campaigns.filter(c => c.stage === 'launch');
-    const avgTime = completedCampaigns.length > 0 
-      ? completedCampaigns.reduce((sum, c) => sum + c.totalTime, 0) / completedCampaigns.length 
+    const avgTime = completedCampaigns.length > 0
+      ? completedCampaigns.reduce((sum, c) => sum + c.totalTime, 0) / completedCampaigns.length
       : 18;
 
     return {
@@ -321,7 +320,7 @@ export function CampaignVelocityEngine() {
                           {campaign.type}
                         </Badge>
                       </div>
-                      
+
                       <div className="flex items-center gap-4 mb-3">
                         <div className="flex items-center gap-2">
                           <Timer className="w-4 h-4 text-muted-foreground" />
@@ -360,9 +359,9 @@ export function CampaignVelocityEngine() {
                           <div key={stage} className="flex items-center">
                             <div className={`
                               flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all
-                              ${campaign.stage === stage 
-                                ? getStageColor(stage) + ' animate-pulse' 
-                                : index < (['concept', 'prototype', 'test', 'launch'].indexOf(campaign.stage)) 
+                              ${campaign.stage === stage
+                                ? getStageColor(stage) + ' animate-pulse'
+                                : index < (['concept', 'prototype', 'test', 'launch'].indexOf(campaign.stage))
                                   ? 'bg-emerald-500/20 border-emerald-500/30 text-emerald-400'
                                   : 'bg-muted border-muted-foreground/30 text-muted-foreground'
                               }
@@ -375,8 +374,8 @@ export function CampaignVelocityEngine() {
                             </div>
                             {index < 3 && (
                               <div className={`w-8 h-[2px] transition-all ${
-                                index < (['concept', 'prototype', 'test', 'launch'].indexOf(campaign.stage)) 
-                                  ? 'bg-emerald-400' 
+                                index < (['concept', 'prototype', 'test', 'launch'].indexOf(campaign.stage))
+                                  ? 'bg-emerald-400'
                                   : 'bg-muted-foreground/30'
                               }`} />
                             )}
@@ -421,7 +420,7 @@ export function CampaignVelocityEngine() {
                 <div className="text-2xl font-bold mb-1">{hours}h</div>
                 <div className="text-xs text-muted-foreground capitalize">{stage}</div>
                 <div className="mt-2 h-1 bg-muted rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className="h-full bg-primary transition-all duration-1000"
                     style={{ width: `${(hours / 10) * 100}%` }}
                   />
