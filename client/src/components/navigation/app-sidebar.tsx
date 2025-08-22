@@ -150,6 +150,18 @@ export function AppSidebar() {
           icon: Zap,
           badge: docsCount > 0 ? docsCount.toString() : "Smart",
         },
+        {
+          title: "AI Code Generator",
+          url: "/ai-code-gen",
+          icon: Code2,
+          badge: "Soon",
+        },
+        {
+          title: "Team Collaboration",
+          url: "/team-sync",
+          icon: User,
+          badge: "Soon",
+        },
       ],
     },
     {
@@ -172,10 +184,10 @@ export function AppSidebar() {
           badge: pendingReviews > 0 ? pendingReviews.toString() : undefined,
         },
         {
-          title: "Git Integration",
-          url: "/git",
+          title: "GitHub Integration", 
+          url: "/github",
           icon: GitBranch,
-          badge: "Connected",
+          badge: "Soon",
         },
         {
           title: "Documentation",
@@ -202,6 +214,29 @@ export function AppSidebar() {
           url: "/achievements",
           icon: Trophy,
           badge: recentAchievements > 0 ? "New!" : undefined,
+        },
+      ],
+    },
+    {
+      title: "Experimental Lab",
+      items: [
+        {
+          title: "AI Market Research",
+          url: "/ai-market-research", 
+          icon: Search,
+          badge: "Soon",
+        },
+        {
+          title: "Competitor Analysis",
+          url: "/competitor-analysis",
+          icon: BarChart3,
+          badge: "Soon",
+        },
+        {
+          title: "Revenue Predictor",
+          url: "/revenue-predictor",
+          icon: Target,
+          badge: "Soon",
         },
       ],
     },
