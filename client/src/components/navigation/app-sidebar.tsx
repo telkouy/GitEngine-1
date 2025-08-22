@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import type { Commit, OKR, User as UserType } from "@shared/schema";
 import {
   Home,
   FolderKanban,
@@ -59,90 +61,124 @@ interface NavGroup {
   items: NavItem[];
 }
 
-const navigationItems: NavGroup[] = [
-  {
-    title: "Overview",
-    items: [
-      {
-        title: "Dashboard",
-        url: "/",
-        icon: Home,
-        isActive: true,
-        badge: "Live",
-      },
-      {
-        title: "Analytics",
-        url: "/analytics",
-        icon: BarChart3,
-        badge: "Beta",
-      },
-    ],
-  },
-  {
-    title: "Development",
-    items: [
-      {
-        title: "Projects",
-        url: "/projects",
-        icon: FolderKanban,
-        subItems: [
-          { title: "Active Projects", url: "/projects/active" },
-          { title: "Archive", url: "/projects/archive" },
-          { title: "Templates", url: "/projects/templates" },
-        ],
-      },
-      {
-        title: "Code Reviews",
-        url: "/reviews",
-        icon: Code2,
-        badge: "3",
-      },
-      {
-        title: "Git Integration",
-        url: "/git",
-        icon: GitBranch,
-      },
-    ],
-  },
-  {
-    title: "Goals & Growth",
-    items: [
-      {
-        title: "OKRs",
-        url: "/okrs",
-        icon: Target,
-        badge: "2",
-      },
-      {
-        title: "Achievements",
-        url: "/achievements",
-        icon: Trophy,
-      },
-    ],
-  },
-  {
-    title: "Resources",
-    items: [
-      {
-        title: "Documentation",
-        url: "/docs",
-        icon: BookOpen,
-      },
-      {
-        title: "Settings",
-        url: "/settings",
-        icon: Settings,
-      },
-    ],
-  },
-];
-
 export function AppSidebar() {
   const { state: sidebarState } = useSidebar();
   const isCollapsed = sidebarState === "collapsed";
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Fetch real data for dynamic badges
+  const { data: dashboardData } = useQuery<{
+    commits: Commit[];
+    okrs: OKR[];
+    insights: any[];
+    achievements: any[];
+  }>({
+    queryKey: ["/api/dashboard", "demo-user"],
+    retry: 3,
+    refetchInterval: 30000, // Refresh every 30 seconds
+  });
+
+  const { data: user } = useQuery<UserType>({
+    queryKey: ["/api/user/demo"],
+    retry: 3,
+  });
+
+  // Calculate dynamic badge counts
+  const pendingReviews = dashboardData?.commits?.filter(commit => 
+    commit.createdAt && new Date(commit.createdAt).getTime() > Date.now() - (24 * 60 * 60 * 1000) // Last 24 hours
+  ).length || 0;
+  
+  const activeOKRs = dashboardData?.okrs?.filter(okr => okr.progress < 100).length || 0;
+  const recentInsights = dashboardData?.insights?.filter(insight =>
+    insight.createdAt && new Date(insight.createdAt).getTime() > Date.now() - (7 * 24 * 60 * 60 * 1000) // Last 7 days
+  ).length || 0;
+  const recentAchievements = dashboardData?.achievements?.filter(achievement =>
+    achievement.unlockedAt && new Date(achievement.unlockedAt).getTime() > Date.now() - (7 * 24 * 60 * 60 * 1000) // Last 7 days
+  ).length || 0;
+  
+  const notifications = recentInsights + recentAchievements;
+
+  // Dynamic navigation items with real data  
+  const navigationItems: NavGroup[] = [
+    {
+      title: "Overview",
+      items: [
+        {
+          title: "Dashboard",
+          url: "/",
+          icon: Home,
+          isActive: true,
+          badge: "Live",
+        },
+        {
+          title: "Analytics",
+          url: "/analytics",
+          icon: BarChart3,
+          badge: dashboardData ? "Beta" : undefined,
+        },
+      ],
+    },
+    {
+      title: "Development",
+      items: [
+        {
+          title: "Projects",
+          url: "/projects",
+          icon: FolderKanban,
+          subItems: [
+            { title: "Active Projects", url: "/projects/active" },
+            { title: "Archive", url: "/projects/archive" },
+            { title: "Templates", url: "/projects/templates" },
+          ],
+        },
+        {
+          title: "Code Reviews",
+          url: "/reviews",
+          icon: Code2,
+          badge: pendingReviews > 0 ? pendingReviews.toString() : undefined,
+        },
+        {
+          title: "Git Integration",
+          url: "/git",
+          icon: GitBranch,
+        },
+      ],
+    },
+    {
+      title: "Goals & Growth",
+      items: [
+        {
+          title: "OKRs",
+          url: "/okrs",
+          icon: Target,
+          badge: activeOKRs > 0 ? activeOKRs.toString() : undefined,
+        },
+        {
+          title: "Achievements",
+          url: "/achievements",
+          icon: Trophy,
+          badge: recentAchievements > 0 ? "New!" : undefined,
+        },
+      ],
+    },
+    {
+      title: "Resources",
+      items: [
+        {
+          title: "Documentation",
+          url: "/docs",
+          icon: BookOpen,
+        },
+        {
+          title: "Settings",
+          url: "/settings",
+          icon: Settings,
+        },
+      ],
+    },
+  ];
 
   const toggleGroup = (groupTitle: string) => {
     const newExpandedGroups = new Set(expandedGroups);
@@ -168,7 +204,7 @@ export function AppSidebar() {
   }));
 
 
-  const notifications = 5; // Placeholder for actual notification count
+  // notifications is now calculated from real data above
 
   return (
     <Sidebar className="border-r border-border/40 backdrop-blur-xl bg-background/80">
@@ -351,7 +387,7 @@ export function AppSidebar() {
             </div>
             {notifications > 0 && (
               <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
-                <span className="text-xs text-white font-medium">{notifications}</span>
+                <span className="text-xs text-white font-medium">{Math.min(notifications, 9)}</span>
               </div>
             )}
           </div>
@@ -366,7 +402,7 @@ export function AppSidebar() {
                 className="flex items-center justify-between w-full overflow-hidden"
               >
                 <div>
-                  <p className="text-sm font-medium">Camila</p>
+                  <p className="text-sm font-medium">{user?.name || "Camila"}</p>
                   <p className="text-xs text-muted-foreground">Force of Nature</p>
                 </div>
                 <NotificationCenter />
