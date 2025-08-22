@@ -66,3 +66,52 @@ function Calendar({
 Calendar.displayName = "Calendar"
 
 export { Calendar }
+
+// DatePicker component using the Calendar
+interface DatePickerProps {
+  date?: Date;
+  onDateChange?: (date: Date | undefined) => void;
+  placeholder?: string;
+  className?: string;
+}
+
+function DatePicker({ 
+  date, 
+  onDateChange, 
+  placeholder = "Pick a date",
+  className 
+}: DatePickerProps) {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <div className={className}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={cn(
+          "w-full justify-start text-left font-normal",
+          !date && "text-muted-foreground",
+          "flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        )}
+      >
+        {date ? date.toLocaleDateString() : placeholder}
+      </button>
+      
+      {isOpen && (
+        <div className="absolute z-50 mt-1 p-3 bg-background border rounded-md shadow-lg">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={(selectedDate) => {
+              onDateChange?.(selectedDate);
+              setIsOpen(false);
+            }}
+            initialFocus
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export { DatePicker }
