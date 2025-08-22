@@ -104,76 +104,98 @@ export function AppSidebar() {
   // Dummy data for docsCount to show badge, replace with actual API call
   const docsCount = 5; 
 
-  // Dynamic navigation items with improved organization
+  // Strategically reorganized navigation items for maximum impact
   const navigationItems: NavGroup[] = [
     {
-      title: "Command Center",
+      title: "⚡ Power Center",
       items: [
         {
-          title: "Dashboard",
+          title: "Command Dashboard",
           url: "/",
           icon: Home,
           isActive: true,
           badge: "Live",
         },
         {
+          title: "Product Velocity",
+          url: "/campaign-velocity",
+          icon: Zap,
+          badge: "🔥 Hot",
+        },
+        {
           title: "Analytics Hub",
           url: "/analytics",
           icon: BarChart3,
-          badge: dashboardData ? "Active" : undefined,
+          badge: dashboardData ? "Active" : "Ready",
         },
       ],
     },
     {
-      title: "AI Workspace",
+      title: "🤖 AI Arsenal",
       items: [
         {
-          title: "AI Assistant",
+          title: "AI Code Insights",
           url: "/ai-insights",
           icon: Sparkles,
-          badge: recentInsights > 0 ? "Active" : "New",
+          badge: recentInsights > 0 ? "🎯 Active" : "Ready",
           subItems: [
-            { title: "Code Insights", url: "/ai-insights" },
             { title: "Performance Analysis", url: "/ai-performance" },
             { title: "Code Reviews", url: "/ai-reviews" },
           ],
         },
         {
-          title: "Product Velocity",
-          url: "/campaign-velocity",
-          icon: Zap,
-          badge: "Live",
-        },
-        {
-          title: "Documentation AI",
+          title: "Smart Documentation",
           url: "/ai-auto-docs",
-          icon: Zap,
-          badge: docsCount > 0 ? docsCount.toString() : "Smart",
+          icon: BookOpen,
+          badge: docsCount > 0 ? docsCount.toString() : "Auto",
         },
         {
-          title: "AI Code Generator",
+          title: "Code Generator",
           url: "/ai-code-gen",
           icon: Code2,
-          badge: "Soon",
+          badge: "Coming Soon",
         },
         {
-          title: "Team Collaboration",
+          title: "Team Sync AI",
           url: "/team-sync",
           icon: User,
-          badge: "Soon",
+          badge: "Coming Soon",
         },
       ],
     },
     {
-      title: "Development Hub",
+      title: "💼 Business Intelligence",
       items: [
         {
-          title: "Projects",
+          title: "Revenue Predictor",
+          url: "/revenue-predictor",
+          icon: Target,
+          badge: "Coming Soon",
+        },
+        {
+          title: "Market Research AI",
+          url: "/ai-market-research", 
+          icon: Search,
+          badge: "Coming Soon",
+        },
+        {
+          title: "Competitor Intel",
+          url: "/competitor-analysis",
+          icon: BarChart3,
+          badge: "Coming Soon",
+        },
+      ],
+    },
+    {
+      title: "🚀 Development",
+      items: [
+        {
+          title: "Active Projects",
           url: "/projects",
           icon: FolderKanban,
           subItems: [
-            { title: "Active Projects", url: "/projects/active" },
-            { title: "Project Archive", url: "/projects/archive" },
+            { title: "Current Work", url: "/projects/active" },
+            { title: "Archives", url: "/projects/archive" },
             { title: "Templates", url: "/projects/templates" },
           ],
         },
@@ -181,13 +203,13 @@ export function AppSidebar() {
           title: "Code Reviews",
           url: "/reviews",
           icon: Code2,
-          badge: pendingReviews > 0 ? pendingReviews.toString() : undefined,
+          badge: pendingReviews > 0 ? `${pendingReviews} pending` : "Clear",
         },
         {
-          title: "GitHub Integration", 
+          title: "GitHub Connect", 
           url: "/github",
           icon: GitBranch,
-          badge: "Soon",
+          badge: "Coming Soon",
         },
         {
           title: "Documentation",
@@ -201,47 +223,24 @@ export function AppSidebar() {
       ],
     },
     {
-      title: "Growth & Goals",
+      title: "🎯 Growth Tracking",
       items: [
         {
-          title: "OKRs & Objectives",
+          title: "OKRs & Goals",
           url: "/okrs",
           icon: Target,
-          badge: activeOKRs > 0 ? activeOKRs.toString() : undefined,
+          badge: activeOKRs > 0 ? `${activeOKRs} active` : "Set Goals",
         },
         {
           title: "Achievements",
           url: "/achievements",
           icon: Trophy,
-          badge: recentAchievements > 0 ? "New!" : undefined,
+          badge: recentAchievements > 0 ? "🏆 New!" : "Unlock More",
         },
       ],
     },
     {
-      title: "Experimental Lab",
-      items: [
-        {
-          title: "AI Market Research",
-          url: "/ai-market-research", 
-          icon: Search,
-          badge: "Soon",
-        },
-        {
-          title: "Competitor Analysis",
-          url: "/competitor-analysis",
-          icon: BarChart3,
-          badge: "Soon",
-        },
-        {
-          title: "Revenue Predictor",
-          url: "/revenue-predictor",
-          icon: Target,
-          badge: "Soon",
-        },
-      ],
-    },
-    {
-      title: "Configuration",
+      title: "⚙️ System",
       items: [
         {
           title: "Settings",
