@@ -1,6 +1,17 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import {
+  getDashboardData,
+  getInsights,
+  getCommits,
+  getDocuments,
+  createDocument,
+  getAchievements,
+  getOkrs,
+  getProjects,
+  getAnalytics
+} from './storage';
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Dashboard data endpoints
@@ -60,7 +71,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/insights/:userId", async (req, res) => {
     try {
       const { userId } = req.params;
-      const insights = await storage.getInsights(userId);
+      const { category } = req.query;
+      const filters = category ? [category as string] : undefined;
+      const insights = getInsights(userId, filters);
       res.json(insights);
     } catch (error) {
       console.error("Error fetching insights:", error);
@@ -95,7 +108,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/documentation/:userId", async (req, res) => {
     try {
       const { userId } = req.params;
-      const docs = await storage.getDocumentation(userId);
+      const docs = storage.getDocumentation(userId);
       res.json(docs);
     } catch (error) {
       console.error("Error fetching documentation:", error);
@@ -111,7 +124,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Missing required fields: title, type, userId" });
       }
 
-      const newDoc = await storage.createDocumentation({
+      const newDoc = storage.createDocumentation({
         title,
         type,
         status,
@@ -133,7 +146,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // Note: This would need implementation in storage
       // const updatedDoc = await storage.updateDocumentation(id, { title, type, status });
-      
+
       res.json({ message: "Documentation update endpoint - needs storage implementation" });
     } catch (error) {
       console.error("Error updating documentation:", error);
@@ -145,7 +158,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/okrs/:userId", async (req, res) => {
     try {
       const { userId } = req.params;
-      const okrs = await storage.getOKRs(userId);
+      const okrs = getOkrs(userId);
       res.json(okrs);
     } catch (error) {
       console.error("Error fetching OKRs:", error);
@@ -157,7 +170,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/achievements/:userId", async (req, res) => {
     try {
       const { userId } = req.params;
-      const achievements = await storage.getAchievements(userId);
+      const achievements = getAchievements(userId);
       res.json(achievements);
     } catch (error) {
       console.error("Error fetching achievements:", error);
@@ -175,6 +188,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error("Error fetching next steps:", error);
       res.status(500).json({ message: "Internal server error" });
     }
+  });
+
+  // Commits endpoint
+  app.get('/api/commits/:userId', (req, res) => {
+    const { userId } = req.params;
+    const { limit } = req.query;
+    const commits = getCommits(userId, limit ? parseInt(limit as string) : undefined);
+    res.json(commits);
+  });
+
+  // Documents endpoint
+  app.get('/api/documents/:userId', (req, res) => {
+    const { userId } = req.params;
+    const documents = getDocuments(userId);
+    res.json(documents);
+  });
+
+  // Create document endpoint
+  app.post('/api/documents/:userId', (req, res) => {
+    const { userId } = req.params;
+    const { title, content, type } = req.body;
+
+    if (userId !== "demo-user") {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const newDoc = createDocument(title, content, type);
+    res.json(newDoc);
+  });
+
+  // Projects endpoint
+  app.get('/api/projects/:userId', (req, res) => {
+    const { userId } = req.params;
+    const projects = getProjects(userId);
+    res.json(projects);
+  });
+
+  // Analytics endpoint
+  app.get('/api/analytics/:userId', (req, res) => {
+    const { userId } = req.params;
+    const { timeRange } = req.query;
+    const analytics = getAnalytics(userId, timeRange as string);
+
+    if (!analytics) {
+      return res.status(404).json({ error: 'Analytics data not found' });
+    }
+
+    res.json(analytics);
   });
 
   const httpServer = createServer(app);

@@ -6,7 +6,7 @@ export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  
+
   // Dashboard data
   getDailyStats(userId: string): Promise<DailyStats | undefined>;
   getCommits(userId: string): Promise<Commit[]>;
@@ -16,7 +16,7 @@ export interface IStorage {
   getAchievements(userId: string): Promise<Achievement[]>;
   getIntegrations(userId: string): Promise<Integration[]>;
   getNextSteps(userId: string): Promise<NextStep[]>;
-  
+
   // Create methods
   createCommit(commit: InsertCommit): Promise<Commit>;
   createInsight(insight: InsertInsight): Promise<Insight>;
@@ -49,7 +49,7 @@ export class MemStorage implements IStorage {
     this.integrations = new Map();
     this.nextSteps = new Map();
     this.dailyStats = new Map();
-    
+
     this.seedData();
   }
 
@@ -805,3 +805,540 @@ export class MemStorage implements IStorage {
 }
 
 export const storage = new MemStorage();
+
+
+// Mock data storage
+const mockUser = {
+  id: "71717f70-547f-41e7-9a17-071e3e4694f1",
+  name: "Alex Johnson",
+  email: "alex@example.com",
+  avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+  role: "Senior Full-Stack Developer",
+  timezone: "America/New_York",
+  theme: "dark",
+  joinedAt: "2023-01-15",
+  settings: {
+    notifications: true,
+    compactMode: false,
+    autoSave: true
+  }
+};
+
+// Extended mock insights data
+const mockInsights = [
+  {
+    id: "insight-1",
+    category: "Performance",
+    title: "Database Query Optimization Opportunity",
+    content: "Your recent user authentication queries could be optimized by adding an index on the email field. This could reduce query time by up to 60%.",
+    priority: "high",
+    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
+    tags: ["database", "performance", "optimization"],
+    impact: "High",
+    estimatedSavings: "200ms per query"
+  },
+  {
+    id: "insight-2", 
+    category: "Code Quality",
+    title: "Component Reusability Pattern Detected",
+    content: "You've created similar button components in 3 different files. Consider extracting this into a shared component library to improve maintainability.",
+    priority: "medium",
+    timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000),
+    tags: ["refactoring", "components", "DRY"],
+    impact: "Medium",
+    estimatedSavings: "15 minutes per new button implementation"
+  },
+  {
+    id: "insight-3",
+    category: "Business Impact", 
+    title: "User Engagement Spike Correlation",
+    content: "The new dashboard features released last week correlate with a 23% increase in user engagement. Consider similar patterns for future releases.",
+    priority: "low",
+    timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000),
+    tags: ["analytics", "user-engagement", "features"],
+    impact: "High",
+    estimatedSavings: "Potential 25% revenue increase"
+  },
+  {
+    id: "insight-4",
+    category: "Performance",
+    title: "Memory Usage Optimization",
+    content: "Your React components are holding onto unnecessary state. Implementing useCallback and useMemo could reduce memory usage by 30%.",
+    priority: "high",
+    timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000),
+    tags: ["react", "memory", "hooks"],
+    impact: "Medium",
+    estimatedSavings: "Improved app responsiveness"
+  },
+  {
+    id: "insight-5",
+    category: "Code Quality",
+    title: "TypeScript Coverage Analysis",
+    content: "Current TypeScript coverage is at 78%. Adding type definitions to 5 more files would bring you to the target 85% coverage.",
+    priority: "medium",
+    timestamp: new Date(Date.now() - 10 * 60 * 60 * 1000),
+    tags: ["typescript", "coverage", "quality"],
+    impact: "Medium",
+    estimatedSavings: "Reduced runtime errors"
+  },
+  {
+    id: "insight-6",
+    category: "Business Impact",
+    title: "API Response Time Impact Analysis",
+    content: "Your recent API optimizations resulted in 40% faster response times, directly correlating with 18% reduction in user bounce rate.",
+    priority: "low",
+    timestamp: new Date(Date.now() - 12 * 60 * 60 * 1000),
+    tags: ["api", "performance", "user-experience"],
+    impact: "High",
+    estimatedSavings: "Better user retention"
+  }
+];
+
+// Extended mock commits data
+const mockCommits = [
+  {
+    id: "commit-1",
+    hash: "a7b3d4e",
+    message: "feat: implement advanced dashboard analytics",
+    author: "Alex Johnson",
+    timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000),
+    branch: "feature/analytics-dashboard",
+    files: ["src/components/analytics.tsx", "src/lib/analytics-utils.ts"],
+    additions: 234,
+    deletions: 12,
+    impact: "high"
+  },
+  {
+    id: "commit-2", 
+    hash: "f9c2a1b",
+    message: "fix: resolve WebSocket connection stability issues",
+    author: "Alex Johnson",
+    timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
+    branch: "bugfix/websocket-stability",
+    files: ["server/websocket.ts", "client/hooks/use-websocket.ts"],
+    additions: 67,
+    deletions: 45,
+    impact: "critical"
+  },
+  {
+    id: "commit-3",
+    hash: "e5d8c7a",
+    message: "refactor: optimize database query performance",
+    author: "Alex Johnson", 
+    timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
+    branch: "refactor/db-optimization",
+    files: ["server/db/queries.ts", "server/routes/users.ts"],
+    additions: 89,
+    deletions: 156,
+    impact: "medium"
+  },
+  {
+    id: "commit-4",
+    hash: "b4f6e9d",
+    message: "feat: add real-time notification system",
+    author: "Alex Johnson",
+    timestamp: new Date(Date.now() - 7 * 60 * 60 * 1000),
+    branch: "feature/notifications",
+    files: ["src/components/ui/notification-center.tsx", "server/events/notifications.ts"],
+    additions: 445,
+    deletions: 23,
+    impact: "high"
+  },
+  {
+    id: "commit-5",
+    hash: "c8a3b7f",
+    message: "docs: update API documentation with new endpoints",
+    author: "Alex Johnson",
+    timestamp: new Date(Date.now() - 9 * 60 * 60 * 1000),
+    branch: "docs/api-updates",
+    files: ["docs/api.md", "docs/examples.md"],
+    additions: 178,
+    deletions: 34,
+    impact: "low"
+  },
+  {
+    id: "commit-6",
+    hash: "d2e5f8c",
+    message: "test: add comprehensive unit tests for auth module",
+    author: "Alex Johnson",
+    timestamp: new Date(Date.now() - 11 * 60 * 60 * 1000),
+    branch: "test/auth-coverage",
+    files: ["tests/auth.test.ts", "tests/helpers/auth-mocks.ts"],
+    additions: 267,
+    deletions: 8,
+    impact: "medium"
+  },
+  {
+    id: "commit-7",
+    hash: "g7h4k9n",
+    message: "style: implement dark mode theme consistency",
+    author: "Alex Johnson",
+    timestamp: new Date(Date.now() - 13 * 60 * 60 * 1000),
+    branch: "style/dark-mode",
+    files: ["src/styles/themes.css", "src/components/ui/theme-provider.tsx"],
+    additions: 123,
+    deletions: 67,
+    impact: "low"
+  }
+];
+
+// Extended mock documents data  
+const mockDocuments = [
+  {
+    id: "doc-1",
+    title: "API Integration Guide",
+    type: "guide",
+    status: "updated",
+    lastModified: new Date(Date.now() - 30 * 60 * 1000),
+    author: "Alex Johnson",
+    content: "Comprehensive guide for integrating with our REST API endpoints...",
+    tags: ["api", "integration", "documentation"],
+    version: "2.1.0"
+  },
+  {
+    id: "doc-2",
+    title: "Database Schema Documentation", 
+    type: "technical",
+    status: "new",
+    lastModified: new Date(Date.now() - 2 * 60 * 60 * 1000),
+    author: "Alex Johnson",
+    content: "Detailed documentation of the current database schema and relationships...",
+    tags: ["database", "schema", "technical"],
+    version: "1.0.0"
+  },
+  {
+    id: "doc-3",
+    title: "Component Library Reference",
+    type: "reference",
+    status: "updated",
+    lastModified: new Date(Date.now() - 4 * 60 * 60 * 1000),
+    author: "Alex Johnson",
+    content: "Reference documentation for all UI components in the design system...",
+    tags: ["components", "ui", "reference"],
+    version: "1.3.2"
+  },
+  {
+    id: "doc-4",
+    title: "Deployment and CI/CD Pipeline",
+    type: "guide",
+    status: "updated",
+    lastModified: new Date(Date.now() - 6 * 60 * 60 * 1000),
+    author: "Alex Johnson", 
+    content: "Step-by-step guide for deployment procedures and CI/CD setup...",
+    tags: ["deployment", "cicd", "devops"],
+    version: "1.2.1"
+  }
+];
+
+// Extended achievements data
+const mockAchievements = [
+  {
+    id: "achievement-1",
+    title: "Code Quality Champion",
+    description: "Maintained 90%+ code quality score for 30 days",
+    icon: "🏆",
+    unlockedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    category: "quality",
+    rarity: "gold"
+  },
+  {
+    id: "achievement-2",
+    title: "Speed Demon",
+    description: "Completed 50 commits in a single day", 
+    icon: "⚡",
+    unlockedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+    category: "productivity",
+    rarity: "silver"
+  },
+  {
+    id: "achievement-3",
+    title: "Documentation Master",
+    description: "Created comprehensive documentation for 10+ features",
+    icon: "📚",
+    unlockedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+    category: "documentation", 
+    rarity: "bronze"
+  },
+  {
+    id: "achievement-4",
+    title: "Bug Squasher",
+    description: "Fixed 100 critical bugs",
+    icon: "🐛",
+    unlockedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
+    category: "debugging",
+    rarity: "gold"
+  },
+  {
+    id: "achievement-5",
+    title: "Team Player",
+    description: "Helped review 50+ pull requests",
+    icon: "🤝",
+    unlockedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
+    category: "collaboration",
+    rarity: "silver"
+  }
+];
+
+// Extended OKRs (Objectives and Key Results)
+const mockOkrs = [
+  {
+    id: "okr-1",
+    objective: "Improve Application Performance",
+    progress: 75,
+    target: 100,
+    keyResults: [
+      { description: "Reduce API response time by 50%", progress: 85, target: 100 },
+      { description: "Achieve 95+ Lighthouse score", progress: 78, target: 100 },
+      { description: "Optimize bundle size by 30%", progress: 62, target: 100 }
+    ],
+    deadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    category: "performance"
+  },
+  {
+    id: "okr-2", 
+    objective: "Enhance Code Quality Standards",
+    progress: 88,
+    target: 100,
+    keyResults: [
+      { description: "Achieve 90% test coverage", progress: 92, target: 100 },
+      { description: "Reduce technical debt by 40%", progress: 76, target: 100 },
+      { description: "Implement automated code review", progress: 95, target: 100 }
+    ],
+    deadline: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000),
+    category: "quality"
+  },
+  {
+    id: "okr-3",
+    objective: "Accelerate Development Velocity", 
+    progress: 65,
+    target: 100,
+    keyResults: [
+      { description: "Reduce deployment time by 60%", progress: 70, target: 100 },
+      { description: "Increase feature delivery by 25%", progress: 55, target: 100 },
+      { description: "Implement automated testing pipeline", progress: 80, target: 100 }
+    ],
+    deadline: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000),
+    category: "velocity"
+  }
+];
+
+// Analytics data for charts
+const mockAnalyticsData = {
+  commitActivity: {
+    daily: [
+      { date: "2024-01-15", commits: 5, additions: 234, deletions: 67 },
+      { date: "2024-01-16", commits: 8, additions: 456, deletions: 123 },
+      { date: "2024-01-17", commits: 3, additions: 189, deletions: 45 },
+      { date: "2024-01-18", commits: 12, additions: 678, deletions: 234 },
+      { date: "2024-01-19", commits: 7, additions: 345, deletions: 89 },
+      { date: "2024-01-20", commits: 9, additions: 567, deletions: 156 },
+      { date: "2024-01-21", commits: 6, additions: 298, deletions: 78 }
+    ],
+    weekly: [
+      { week: "Week 1", commits: 28, productivity: 85 },
+      { week: "Week 2", commits: 34, productivity: 92 },
+      { week: "Week 3", commits: 25, productivity: 78 },
+      { week: "Week 4", commits: 31, productivity: 88 }
+    ]
+  },
+  performanceMetrics: {
+    codeQuality: [
+      { month: "Oct", score: 82 },
+      { month: "Nov", score: 85 },
+      { month: "Dec", score: 87 },
+      { month: "Jan", score: 89 }
+    ],
+    buildTimes: [
+      { date: "2024-01-15", buildTime: 45 },
+      { date: "2024-01-16", buildTime: 38 },
+      { date: "2024-01-17", buildTime: 42 },
+      { date: "2024-01-18", buildTime: 35 },
+      { date: "2024-01-19", buildTime: 40 },
+      { date: "2024-01-20", buildTime: 33 },
+      { date: "2024-01-21", buildTime: 36 }
+    ]
+  }
+};
+
+// Projects data
+const mockProjects = [
+  {
+    id: "project-1",
+    name: "E-commerce Platform",
+    description: "Modern React-based e-commerce solution with advanced analytics",
+    status: "active",
+    progress: 78,
+    lastActivity: new Date(Date.now() - 2 * 60 * 60 * 1000),
+    team: ["Alex Johnson", "Sarah Chen", "Mike Rodriguez"],
+    technologies: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+    commits: 145,
+    issues: { open: 8, closed: 67 }
+  },
+  {
+    id: "project-2",
+    name: "Mobile App API",
+    description: "RESTful API backend for mobile application with real-time features",
+    status: "active", 
+    progress: 92,
+    lastActivity: new Date(Date.now() - 30 * 60 * 1000),
+    team: ["Alex Johnson", "David Kim"],
+    technologies: ["Express", "Socket.io", "Redis", "MongoDB"],
+    commits: 89,
+    issues: { open: 3, closed: 45 }
+  },
+  {
+    id: "project-3",
+    name: "Analytics Dashboard",
+    description: "Real-time analytics and reporting dashboard",
+    status: "completed",
+    progress: 100,
+    lastActivity: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+    team: ["Alex Johnson", "Emma Wilson", "Tom Zhang"],
+    technologies: ["Vue.js", "D3.js", "Python", "FastAPI"],
+    commits: 234,
+    issues: { open: 0, closed: 112 }
+  }
+];
+
+const mockDashboardData = {
+  dailyStats: {
+    commitsToday: 7,
+    insightsGenerated: 12,
+    hoursLogged: 8,
+    docsUpdated: 3
+  },
+  weeklyStats: {
+    commits: 45,
+    linesAdded: 2340,
+    linesRemoved: 890,
+    filesChanged: 67
+  },
+  performanceMetrics: {
+    codeQualityScore: 87,
+    asyncMastery: 94,
+    bestCodingTime: "2:00 PM - 4:00 PM"
+  },
+  insights: mockInsights,
+  recentCommits: mockCommits,
+  documents: mockDocuments,
+  achievements: mockAchievements,
+  okrs: mockOkrs,
+  analytics: mockAnalyticsData,
+  projects: mockProjects
+};
+
+export const getUser = (userId: string) => {
+  return userId === "demo" ? mockUser : null;
+};
+
+export const getDashboardData = (userId: string) => {
+  return userId === "demo-user" ? mockDashboardData : null;
+};
+
+export const getInsights = (userId: string, filters?: string[]) => {
+  if (userId !== "demo-user") return [];
+
+  let filteredInsights = [...mockInsights];
+
+  if (filters && filters.length > 0) {
+    filteredInsights = filteredInsights.filter(insight => 
+      filters.includes(insight.category)
+    );
+  }
+
+  return filteredInsights.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());
+};
+
+export const getCommits = (userId: string, limit?: number) => {
+  if (userId !== "demo-user") return [];
+
+  const commits = [...mockCommits].sort((a, b) => 
+    b.timestamp.getTime() - a.timestamp.getTime()
+  );
+
+  return limit ? commits.slice(0, limit) : commits;
+};
+
+export const getDocuments = (userId: string) => {
+  return userId === "demo-user" ? mockDocuments : [];
+};
+
+export const getAchievements = (userId: string) => {
+  return userId === "demo-user" ? mockAchievements : [];
+};
+
+export const getOkrs = (userId: string) => {
+  return userId === "demo-user" ? mockOkrs : [];
+};
+
+export const getProjects = (userId: string) => {
+  return userId === "demo-user" ? mockProjects : [];
+};
+
+export const getAnalytics = (userId: string, timeRange?: string) => {
+  if (userId !== "demo-user") return null;
+
+  // Could filter analytics data based on timeRange if needed
+  return mockAnalyticsData;
+};
+
+export const generateInsight = () => {
+  const categories = ["Performance", "Code Quality", "Business Impact"];
+  const titles = [
+    "Optimization Opportunity Detected",
+    "Code Pattern Analysis Complete", 
+    "Performance Metrics Updated",
+    "Quality Score Improvement Suggested",
+    "Memory Usage Optimization Available",
+    "API Response Time Improvement Detected",
+    "Code Duplication Pattern Found",
+    "User Experience Enhancement Opportunity"
+  ];
+
+  const contents = [
+    "Your recent changes show potential for optimization in the main rendering loop.",
+    "Similar patterns detected across multiple components suggest refactoring opportunities.",
+    "Recent performance improvements have resulted in 15% better load times.",
+    "Code quality metrics suggest focusing on error handling improvements.",
+    "Memory usage could be reduced by 25% by implementing proper cleanup in useEffect hooks.",
+    "Database queries could be optimized to reduce response time by up to 40%.",
+    "Three similar utility functions found that could be consolidated into a single reusable module.",
+    "User engagement analytics suggest implementing progressive loading for better perceived performance."
+  ];
+
+  const newInsight = {
+    id: `insight-${Date.now()}`,
+    category: categories[Math.floor(Math.random() * categories.length)],
+    title: titles[Math.floor(Math.random() * titles.length)],
+    content: contents[Math.floor(Math.random() * contents.length)],
+    priority: ["high", "medium", "low"][Math.floor(Math.random() * 3)],
+    timestamp: new Date(),
+    tags: ["ai-generated", "real-time"],
+    impact: ["High", "Medium", "Low"][Math.floor(Math.random() * 3)],
+    estimatedSavings: "Generated insight"
+  };
+
+  // Add to mock data for persistence during session
+  mockInsights.unshift(newInsight);
+
+  return newInsight;
+};
+
+export const createDocument = (title: string, content: string, type: string = "guide") => {
+  const newDoc = {
+    id: `doc-${Date.now()}`,
+    title,
+    type,
+    status: "new" as const,
+    lastModified: new Date(),
+    author: "Alex Johnson",
+    content,
+    tags: ["generated", "real-time"],
+    version: "1.0.0"
+  };
+
+  // Add to mock data for persistence during session
+  mockDocuments.unshift(newDoc);
+
+  return newDoc;
+};
