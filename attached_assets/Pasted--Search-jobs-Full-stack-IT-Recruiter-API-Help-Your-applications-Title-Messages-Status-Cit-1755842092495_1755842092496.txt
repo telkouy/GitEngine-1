@@ -1,0 +1,255 @@
+ 
+Search jobs: Full-stack, IT Recruiter, API...
+Help
+Your applications
+Title	Messages	Status	City	Date sent
+AutoReel
+Product Engineer Autoreel Full time
+AutoReel
+ 0
+ Sent	Remote (Any location)	Aug 22
+PEOPLE
+Product Manager Especializado en IA Full time
+PEOPLE
+ 0
+ Sent	Remote (Any location)	Aug 21
+Force Of Nature
+Vibe Coder – AI Product Builder Full time
+Force Of Nature
+ 8
+ Seen	Remote (Any location)	Aug 17
+SEEK
+Full-Stack Python + React Full time
+SEEK
+ 0
+ Sent	Remote (Any location)	Aug 19
+EVEN
+Front-end Software Engineer Full time
+EVEN
+ 0
+ Seen	Remote (Any location)	Aug 18
+BuildWithin
+Ingeniero/a en Inteligencia Artificial Aplicada Full time
+BuildWithin
+ 0
+ Sent	Remote (Any location)	Aug 18
+BC Tecnología
+Desarrollador Full-Stack Latam Full time
+BC Tecnología
+ 0
+ Sent	Remote (Any location)	Aug 17
+Compara
+Automations Developer Full time
+Compara
+ 0
+ Seen	Remote (Any location)	Aug 17
+Moventi
+Experto en Agentes de IA Freelance
+Moventi
+ 0
+ Sent	Remote (Any location)	Aug 17
+Remote Leverage
+AI Prompt Specialist Full time
+Remote Leverage
+ 0
+ Sent	Remote (Any location)	Aug 17
+Abby Connect
+Full-Stack Developer Full time
+Abby Connect
+ Draft	Remote (Any location)	
+dataRoo LLC
+Full-Stack Developer Agentic AI Project Freelance
+dataRoo LLC
+ Draft	Remote (South America)	
+Treehouse Holdings
+Web Scraping Engineer (Data Extraction) Full time
+Treehouse Holdings
+ Draft	Remote (Any location)	
+Apply to more jobs and maximize your chances
+Desarrollador Back-end (Python) – AWS
+Zerviz Technologies
+Santiago (Hybrid)
+Technical Lead
+Dynamic Devs
+Santiago (Hybrid)
+Desarrollador Full-Stack Node.js/angular/Nestjs
+coderslab.io
+Santiago (Hybrid)
+Desarrollador Full-Stack React/Node.js Senior
+TCIT
+Santiago (In-office)
+Desarrollador Full-Stack
+coderslab.io
+Barranquilla (In-office)
+Tech Lead y Full-Stack Developer
+Enterstep Spa
+Santiago (Hybrid)
+Desarrollador Back-end o Full-Stack
+Lisit
+Santiago (Hybrid)
+Desarrollador Full-Stack Senior
+Genesys Tecnologías de Inform. SpA
+Santiago (Hybrid)
+Senior Full-Stack React/Node.js Engineer
+TCIT
+Santiago (In-office)
+Senior Software Engineer
+OpenLoop
+Lima (Hybrid)
+
+Vibe Coder – AI Product Builder
+Force Of Nature
+Remote (Any location)
+2500 - 4000 USD/month
+Sent 4 days ago
+Hi Camila,
+
+Thanks for sharing your profile — your experience with Cursor, Windsurf, Lovable, and automation tools is very aligned with what we’re looking for in a Vibe Coder. Before setting up a call, could you answer a few quick questions and, if possible, share some prototypes you’ve built?
+
+Which AI web builders (Lovable, V0, Bolt.new, Replit, etc.) and AI-assisted IDEs (Cursor, Windsurf) do you use most, and why?
+
+Can you share a link to one or two prototypes you’ve built with these tools (GitHub repos, demo links, or screenshots)?
+
+Walk me through how you typically take an idea from concept → prototype → working version using AI tools.
+
+If an AI builder produced broken or incomplete code, how would you fix and finish it? Do you usually iterate inside the builder, or clone to GitHub and continue locally?
+
+In your view, when is a prototype “good enough” to test with real users?
+
+Do you see yourself primarily as a fast prototyper (hands-on building quickly) or as someone who prefers to also take a leadership/product role around these projects?
+
+Looking forward to your answers and to seeing some of your prototypes!
+
+Camila Carratelli — August 18, 2025
+**Hi there!**
+
+Thanks for your interest in my profile. I'm excited about the Vibe Coder role and happy to answer your questions:
+
+**1. Which AI web builders and AI-assisted IDEs do you use most, and why?**
+
+My go-to stack is **Lovable, Cursor, Windsurf, and Replit**. I've used them all extensively, but here's my typical workflow: I start with **Lovable** for rapid frontend prototyping and UI design, presenting a clear development plan focused on interface and user experience. Then I transition to **Cursor** or **Windsurf** for backend development and more complex integrations. Currently, I'm favoring **Windsurf** because of their free models like SWE-1 and their excellent complementary tools, especially workflows. For each project, I design custom workflows that keep the AI controlled while respecting the app's architecture and ensuring everything is properly documented.
+
+**2. Prototype examples:**
+
+Here are some recent prototypes I've built:
+
+- **[Compra Contal Venta](preview--compra-contal-vent... - A comprehensive accounting and sales management system designed for small to medium businesses. Features include financial reporting, transaction tracking, and customer management. (In development - you can log in with any email/password to explore)
+
+- **[Automate Pulse Center](preview--automate-pulse-cen... - A workflow automation dashboard that centralizes process monitoring and task management. Built to help teams track automation performance and optimize operational workflows.
+
+- **[Estudio 360 Nexus](preview--estudio-360-nexus.... - A creative studio management platform featuring project collaboration tools, client communication interfaces, and resource allocation tracking.
+
+- **[Opti Gestión](preview--opti-gestion-34.lo... - An optimization-focused management tool designed to streamline business operations through data visualization and performance analytics.
+
+I also have several examples in Replit and will be sending screenshots of those projects shortly. Additionally, I have other completed developments that are currently in production at my previous company, but I can't showcase them publicly as they're proprietary business tools. I recently ended my relationship with that company last Friday to dedicate myself to pursuing opportunities in the programming world with vibe coding.
+
+**3. Concept → Prototype → Working Version Process:**
+
+My typical flow: **Conceptualization** (using Perplexity as a product manager to analyze requirements) → **UI/UX rapid prototyping** (Lovable with structured development plans) → **Backend integration** (Windsurf with custom workflows) → **Iteration and refinement** (combining tools and continuous AI-assisted improvements). I also leverage Perplexity to analyze projects from a product management perspective, then use those insights to enhance development and meet objectives.
+
+**4. Fixing broken/incomplete AI code:**
+
+I prefer a hybrid approach - I iterate directly in the builder for quick fixes and UI adjustments, but for complex debugging and architectural improvements, I transition to local environments or GitHub. The key is knowing when each approach is more efficient.
+
+**5. "Good enough" to test:**
+
+I believe in early validation with functional core features rather than polished details. A prototype is ready for user testing when the main user journey works smoothly, even if some edge cases or visual refinements are pending. Real user feedback often reveals insights that save development time on features that might not be needed.
+
+**6. Role preference:**
+
+I definitely lean toward **leadership and product management** alongside hands-on building. I enjoy taking ownership of objectives and guiding team members toward the final goal, combining technical execution with strategic vision.
+
+**Key achievement:** The combination of various AI tools has allowed me to generate functional prototypes/demos in **under 24 hours**, which has been game-changing for rapid validation and client presentations.
+
+Looking forward to discussing how this approach could add value to your team!
+
+Best regards,
+Camila
+
+Camila Pisano — August 18, 2025
+Additional note:
+
+I'll also be attaching screenshots of several projects I've built in Replit to give you a better sense of my development range and capabilities. These examples showcase different aspects of my workflow, from rapid API integrations to full-stack applications with real-time features. The Replit projects demonstrate how I leverage the platform's collaborative environment and instant deployment capabilities to quickly iterate and test concepts.
+
+I believe these additional examples will provide a more comprehensive view of my approach to vibe coding and rapid prototyping across different platforms.
+
+Camila Pisano — August 18, 2025
+At the moment, I am working on a document with samples of some projects I have completed on Replit (in addition to other tools as I mentioned earlier), along with a brief description. As soon as I have it ready, I will share it with you :)
+
+Camila Pisano — August 18, 2025
+Hi Camila Carratelli,
+
+As promised, I've prepared comprehensive documentation of my Replit projects that showcases the range of AI-powered applications I've developed. You can find detailed project samples and descriptions here:
+
+github.com/pisanocami/docs
+
+This repository includes:
+
+7 additional production-ready applications developed on Replit
+
+Detailed project documentation with technical specifications and business impact
+
+Screenshots and feature descriptions for each application
+
+Development methodology insights showing my rapid prototyping approach
+
+The projects span various industries including financial analysis tools, document processing systems, API testing utilities, and even a GPU-accelerated development environment. Each demonstrates different aspects of my vibe coding workflow and AI integration capabilities.
+
+These examples complement the Lovable prototypes I shared earlier and provide a complete picture of my development range across different platforms and use cases.
+
+I'm excited to discuss how these experiences align with Force Of Nature's vision for AI-powered product building!
+
+Best regards,
+Camila
+
+Camila Pisano — August 18, 2025
+Hi Camila Carratelli,
+
+I hope this message finds you well. I was just reviewing the prototypes I shared earlier and noticed that some of the URLs had extra characters appended to them (likely from formatting issues in the message). To ensure everything is accessible without any hiccups, I'm resending the complete, corrected list below:
+
+Compra Contal Venta: preview--compra-contal-vent...
+
+Estudio 360 Nexus: preview--estudio-360-nexus....
+
+Automate Pulse Center: preview--automate-pulse-cen...
+
+Opti Gestión: preview--opti-gestion-34.lo...
+
+DGI RPA Automator Bot: preview--dgi-rpa-automator-...
+
+Dev Suite AI Paradise: preview--dev-suite-ai-parad...
+
+These should now load directly without any issues. As a reminder, you can log in to most of them with any email/password combination to explore the features. If you have any trouble accessing them or need more details on any specific project, just let me know—I'm happy to provide walkthroughs or additional context.
+
+Looking forward to your thoughts and hopefully chatting soon about the Vibe Coder role!
+
+Best regards,
+Camila Pisano
+
+Camila Pisano — August 19, 2025
+Hi Camila,
+
+Thanks so much for your interest in the Vibe Coder role. We've reviewed your application, and we're really impressed with your experience, especially with the tools we're using.
+
+We're currently considering two options based on your monthly salary estimate of $4,000. We've found that typical rates for a role like this in your region are a bit lower, so we'd like to propose a few alternatives:
+
+A part-time test project at a rate of around $20 per hour to start. This would allow us to see how we work together on a small project.
+
+A full-time monthly salary of around $2,000 - $2,200, which is more in line with our budget for a full-time position.
+
+We're still mapping out the details of the first test project with our team, but we wanted to get your thoughts on these options. Let me know what you think.
+
+Camila Carratelli — August 19, 2025at 8:27:02 PM
+Hi Camila Carratelli ,
+
+Thank you very much for considering me for the Vibe Coder position and for the options you’ve presented. I’m excited about the possibility of joining the team and contributing my skills.
+
+I’m very happy to accept the part-time test project proposal at $20 per hour. I believe this arrangement will allow us to get to know each other better and demonstrate my ability to deliver value from the start. I remain available to receive the details and coordinate the kickoff.
+
+Thanks again for this opportunity!
+
+Kind regards,
+Camila
+
+Camila Pisano — August 20, 2025
+Type a message
