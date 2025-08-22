@@ -55,7 +55,7 @@ export class MemStorage implements IStorage {
 
   private seedData() {
     // Create demo user
-    const userId = randomUUID();
+    const userId = "demo-user";
     const user: User = {
       id: userId,
       username: "demo",
