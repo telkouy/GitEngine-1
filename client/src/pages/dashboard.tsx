@@ -38,22 +38,54 @@ export default function Dashboard() {
   const [isCompactMode, setIsCompactMode] = useState(false);
 
   // WebSocket connection for real-time updates
-  const { isConnected, lastMessage } = useWebSocket('ws://localhost:5000');
+  const { isConnected } = useWebSocket({
+    url: 'ws://localhost:5000',
+    onMessage: (message) => {
+      console.log('WebSocket message:', message);
+    },
+    onConnect: () => {
+      console.log('WebSocket connected');
+    },
+    onDisconnect: () => {
+      console.log('WebSocket disconnected');
+    }
+  });
 
-  const { data: user } = useQuery({
-      queryKey: ['user', 'demo'],
-      queryFn: async () => {
-        const response = await fetch('/api/user/demo');
-        return response.json();
-      },
-    });
+  const { data: user, error: userError } = useQuery<User>({
+    queryKey: ["/api/user/demo"],
+    retry: 3,
+    retryDelay: 1000,
+  });
 
-  const { data: dashboardData, isLoading } = useQuery<DashboardData>({
+  const { data: dashboardData, isLoading, error: dashboardError } = useQuery<DashboardData>({
     queryKey: ["/api/dashboard", userId],
+    retry: 3,
+    retryDelay: 1000,
   });
 
   if (isLoading) {
     return <DashboardSkeleton />;
+  }
+
+  if (userError || dashboardError) {
+    return (
+      <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent-violet/10 to-accent-cyan/20" />
+        <div className="relative text-center space-y-4">
+          <div className="text-6xl mb-4">⚠️</div>
+          <h2 className="text-2xl font-bold text-foreground">Connection Error</h2>
+          <p className="text-muted-foreground max-w-md">
+            Unable to load dashboard data. Please check your connection and try again.
+          </p>
+          <Button 
+            onClick={() => window.location.reload()} 
+            className="mt-4 bg-gradient-to-r from-primary to-accent-violet text-white"
+          >
+            Retry
+          </Button>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -106,7 +138,7 @@ export default function Dashboard() {
               >
                 <LiveIndicator 
                   isConnected={isConnected} 
-                  lastUpdate={lastMessage ? new Date() : undefined}
+                  lastUpdate={isConnected ? new Date() : undefined}
                   className="hidden sm:flex" 
                 />
                 <ExportModal 
