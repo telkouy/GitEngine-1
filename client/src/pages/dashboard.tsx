@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, TrendingUp, Brain, GitCommit, FileText, Target, Award, BarChart3, Activity, Users, Clock, Sparkles, Link2, AlertCircle, BookOpen } from "lucide-react";
+import { Zap, TrendingUp, Brain, GitCommit, FileText, Target, Award, BarChart3, Activity, Users, Clock, Sparkles, Link2, AlertCircle, BookOpen, Code2, Palette } from "lucide-react";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { DashboardSkeleton } from "@/components/ui/skeleton-components";
 import { LiveIndicator } from "@/components/ui/live-indicator";
