@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, TrendingUp, Brain, GitCommit, FileText, Target, Award, BarChart3, Activity, Users, Clock, Sparkles, Link2, AlertCircle, BookOpen, Code2, Palette, Rocket, Shield, Lightning, ChevronRight, Play, Pause, FastForward } from "lucide-react";
+import { Zap, TrendingUp, Brain, GitCommit, FileText, Target, Award, BarChart3, Activity, Users, Clock, Sparkles, Link2, AlertCircle, BookOpen, Code2, Palette, Rocket, Shield, ChevronRight, Play, Pause, FastForward } from "lucide-react";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { DashboardSkeleton } from "@/components/ui/skeleton-components";
 import { LiveIndicator } from "@/components/ui/live-indicator";
@@ -114,7 +114,7 @@ export default function Dashboard() {
         value: `${baseMetrics[0]}×`,
         change: '+340%',
         trend: 'explosive' as const,
-        icon: <Lightning className="h-5 w-5" />,
+        icon: <Zap className="h-5 w-5" />,
         color: "text-emerald-400",
         gradient: "from-emerald-400 via-teal-400 to-cyan-400",
         insights: [
@@ -282,7 +282,7 @@ export default function Dashboard() {
                     >
                       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 via-teal-400 to-cyan-400 p-[2px]">
                         <div className="w-full h-full rounded-[10px] bg-black flex items-center justify-center">
-                          <Lightning className="w-6 h-6 text-emerald-400" />
+                          <Zap className="w-6 h-6 text-emerald-400" />
                         </div>
                       </div>
                       <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-emerald-400 via-teal-400 to-cyan-400 opacity-40 blur-lg animate-pulse" />
@@ -398,7 +398,7 @@ export default function Dashboard() {
                         
                         <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
                           <div className="flex items-center gap-2 text-purple-400 mb-2">
-                            <Lightning className="w-5 h-5" />
+                            <Zap className="w-5 h-5" />
                             <span className="font-semibold">AI Amplification</span>
                           </div>
                           <p className="text-2xl font-bold text-white">340%</p>
