@@ -23,6 +23,7 @@ import AIInsightsPage from '@/pages/ai-insights';
 import AIReviewsPage from '@/pages/ai-reviews';
 import AIPerformancePage from '@/pages/ai-performance';
 import Settings from '@/pages/settings';
+import CampaignVelocityPage from '@/pages/campaign-velocity';
 import NotFound from '@/pages/not-found';
 
 // Global error handler for unhandled promise rejections
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/achievements" element={<Achievements />} />
                 <Route path="/documentation" element={<Documentation />} />
                 <Route path="/settings" element={<Settings />} />
+                <Route path="/campaign-velocity" element={<CampaignVelocityPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </ErrorBoundary>

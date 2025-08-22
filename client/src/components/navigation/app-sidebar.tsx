@@ -139,6 +139,12 @@ export function AppSidebar() {
           ],
         },
         {
+          title: "Campaign Velocity",
+          url: "/campaign-velocity",
+          icon: Zap,
+          badge: "Live",
+        },
+        {
           title: "Documentation AI",
           url: "/ai-auto-docs",
           icon: Zap,
