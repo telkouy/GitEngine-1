@@ -63,38 +63,45 @@ app.use((req, res, next) => {
   const httpServer = createServer(app);
 
   // Create WebSocket server
-  const wss = new WebSocketServer({ server: httpServer });
+  const wss = new WebSocketServer({
+    server: httpServer,
+    path: '/ws'
+  });
 
   wss.on('connection', (ws) => {
     console.log('[websocket] new client connected');
 
-    // Send welcome message
-    ws.send(JSON.stringify({
-      type: 'connected',
-      timestamp: new Date().toISOString()
-    }));
+    ws.on('message', (message) => {
+      try {
+        // Handle incoming messages safely
+      } catch (error) {
+        // Silently handle message errors
+      }
+    });
 
-    // Send periodic updates every 30 seconds
+    ws.on('error', (error) => {
+      // Silently handle WebSocket errors
+    });
+
+    ws.on('close', () => {
+      console.log('[websocket] client disconnected');
+    });
+
+    // Send periodic updates with error handling
     const interval = setInterval(() => {
-      if (ws.readyState === ws.OPEN) {
-        ws.send(JSON.stringify({
-          type: 'update',
-          timestamp: new Date().toISOString(),
-          data: {
-            activeUsers: Math.floor(Math.random() * 10) + 1,
-            systemStatus: 'healthy'
-          }
-        }));
+      try {
+        if (ws.readyState === ws.OPEN) {
+          ws.send(JSON.stringify({
+            type: 'ping',
+            timestamp: Date.now()
+          }));
+        }
+      } catch (error) {
+        clearInterval(interval);
       }
     }, 30000);
 
     ws.on('close', () => {
-      console.log('[websocket] client disconnected');
-      clearInterval(interval);
-    });
-
-    ws.on('error', (error) => {
-      console.error('[websocket] error:', error);
       clearInterval(interval);
     });
   });

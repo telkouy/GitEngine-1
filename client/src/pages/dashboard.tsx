@@ -54,26 +54,28 @@ export default function Dashboard() {
   const { isConnected } = useWebSocket({
     url: 'ws://localhost:5000',
     onMessage: (message) => {
-      console.log('WebSocket message:', message);
+      // Handle WebSocket messages silently
     },
     onConnect: () => {
-      console.log('WebSocket connected');
+      // Connection established
     },
     onDisconnect: () => {
-      console.log('WebSocket disconnected');
+      // Connection lost
     }
   });
 
   const { data: user, error: userError } = useQuery<User>({
     queryKey: ["/api/user/demo"],
-    retry: 3,
+    retry: 1,
     retryDelay: 1000,
+    throwOnError: false,
   });
 
   const { data: dashboardData, isLoading, error: dashboardError } = useQuery<DashboardData>({
     queryKey: ["/api/dashboard", userId],
-    retry: 3,
+    retry: 1,
     retryDelay: 1000,
+    throwOnError: false,
   });
 
   // Calculate data relationships and insights

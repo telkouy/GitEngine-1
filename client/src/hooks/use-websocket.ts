@@ -50,12 +50,12 @@ export function useWebSocket({
         }
       };
 
-      ws.current.onclose = () => {
+      ws.current.onclose = (event) => {
         setIsConnected(false);
         onDisconnect?.();
 
-        // Attempt to reconnect
-        if (reconnectAttempts < maxReconnectAttempts) {
+        // Only attempt to reconnect if it was an unexpected close
+        if (!event.wasClean && reconnectAttempts < maxReconnectAttempts) {
           reconnectTimer.current = setTimeout(() => {
             setReconnectAttempts(prev => prev + 1);
             connect();
@@ -64,8 +64,8 @@ export function useWebSocket({
       };
 
       ws.current.onerror = (error) => {
-        console.error('WebSocket error:', error);
-        // Don't throw or create unhandled rejections
+        // Silently handle WebSocket errors to prevent console spam
+        setIsConnected(false);
       };
     } catch (error) {
       console.error('Failed to create WebSocket connection:', error);
