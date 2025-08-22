@@ -60,9 +60,9 @@ export class MemStorage implements IStorage {
       id: userId,
       username: "demo",
       password: "password",
-      name: "Demo User",
-      email: "demo@company.com",
-      timezone: "UTC",
+      name: "Camila Pisano",
+      email: "camila@vibecoders.dev",
+      timezone: "America/New_York",
       theme: "auto",
       createdAt: new Date(),
     };
@@ -71,16 +71,16 @@ export class MemStorage implements IStorage {
     // Daily stats
     const dailyStats: DailyStats = {
       id: randomUUID(),
-      commitsToday: 3.8,
-      insightsGenerated: 2.5,
-      hoursLogged: 2,
-      docsUpdated: 1.2,
+      commitsToday: 12,
+      insightsGenerated: 8,
+      hoursLogged: 7.5,
+      docsUpdated: 4,
       userId,
       date: new Date(),
     };
     this.dailyStats.set(userId, dailyStats);
 
-    // Sample commits
+    // Extended commits data
     const commits: Commit[] = [
       {
         id: randomUUID(),
@@ -90,7 +90,7 @@ export class MemStorage implements IStorage {
         impact: "Revenue Attribution",
         valueScore: 9,
         userId,
-        createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+        createdAt: new Date(Date.now() - 1 * 60 * 60 * 1000), // 1 hour ago
       },
       {
         id: randomUUID(),
@@ -100,7 +100,7 @@ export class MemStorage implements IStorage {
         impact: "Campaign Optimization",
         valueScore: 8,
         userId,
-        createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
+        createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
       },
       {
         id: randomUUID(),
@@ -110,12 +110,102 @@ export class MemStorage implements IStorage {
         impact: "Team Productivity",
         valueScore: 7,
         userId,
+        createdAt: new Date(Date.now() - 3 * 60 * 60 * 1000), // 3 hours ago
+      },
+      {
+        id: randomUUID(),
+        hash: "m3n4o5p",
+        message: "Add TypeScript interfaces for data models",
+        project: "Force of Nature Platform",
+        impact: "Code Quality",
+        valueScore: 6,
+        userId,
+        createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "q6r7s8t",
+        message: "Optimize database queries for user analytics",
+        project: "Ring Analytics Dashboard",
+        impact: "Performance",
+        valueScore: 9,
+        userId,
+        createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "u9v0w1x",
+        message: "Create responsive mobile layout for dashboard",
+        project: "Harley Davidson CRM",
+        impact: "User Experience",
+        valueScore: 8,
+        userId,
+        createdAt: new Date(Date.now() - 6 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "y2z3a4b",
+        message: "Implement automated testing suite",
+        project: "Internal Tools",
+        impact: "Code Quality",
+        valueScore: 7,
+        userId,
+        createdAt: new Date(Date.now() - 8 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "c5d6e7f",
+        message: "Add multi-language support for client portals",
+        project: "Force of Nature Platform",
+        impact: "Internationalization",
+        valueScore: 8,
+        userId,
+        createdAt: new Date(Date.now() - 12 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "g8h9i0j",
+        message: "Integrate Stripe payment processing",
+        project: "Ring Analytics Dashboard",
+        impact: "Revenue Features",
+        valueScore: 9,
+        userId,
+        createdAt: new Date(Date.now() - 18 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "k1l2m3n",
+        message: "Setup CI/CD pipeline with GitHub Actions",
+        project: "Harley Davidson CRM",
+        impact: "DevOps",
+        valueScore: 7,
+        userId,
         createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+      },
+      {
+        id: randomUUID(),
+        hash: "o4p5q6r",
+        message: "Add WebSocket support for real-time updates",
+        project: "Internal Tools",
+        impact: "Real-time Features",
+        valueScore: 8,
+        userId,
+        createdAt: new Date(Date.now() - 30 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "s7t8u9v",
+        message: "Create admin dashboard for user management",
+        project: "Force of Nature Platform",
+        impact: "Admin Tools",
+        valueScore: 6,
+        userId,
+        createdAt: new Date(Date.now() - 36 * 60 * 60 * 1000),
       },
     ];
     commits.forEach(commit => this.commits.set(commit.id, commit));
 
-    // Sample insights
+    // Extended AI insights data
     const insights: Insight[] = [
       {
         id: randomUUID(),
@@ -133,7 +223,7 @@ export class MemStorage implements IStorage {
         category: "Code Quality",
         impact: "Medium Impact",
         userId,
-        createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
+        createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
       },
       {
         id: randomUUID(),
@@ -142,16 +232,79 @@ export class MemStorage implements IStorage {
         category: "Business Impact",
         impact: "High Impact",
         userId,
-        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+        createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "API Response Time Optimization",
+        description: "Database query improvements reduced API response time by 35%",
+        category: "Performance",
+        impact: "High Impact",
+        userId,
+        createdAt: new Date(Date.now() - 6 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Mobile User Experience Boost",
+        description: "Responsive design changes increased mobile engagement by 22%",
+        category: "Business Impact",
+        impact: "Medium Impact",
+        userId,
+        createdAt: new Date(Date.now() - 8 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Code Coverage Milestone",
+        description: "Test suite coverage reached 85% across all critical modules",
+        category: "Code Quality",
+        impact: "Medium Impact",
+        userId,
+        createdAt: new Date(Date.now() - 12 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Deployment Frequency Increase",
+        description: "CI/CD improvements enabled 3x faster deployment cycles",
+        category: "Performance",
+        impact: "High Impact",
+        userId,
+        createdAt: new Date(Date.now() - 18 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Security Vulnerability Prevention",
+        description: "Proactive code review caught 5 potential security issues",
+        category: "Code Quality",
+        impact: "High Impact",
+        userId,
+        createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Cross-Team Knowledge Transfer",
+        description: "Documentation efforts reduced onboarding time by 40%",
+        category: "Business Impact",
+        impact: "Medium Impact",
+        userId,
+        createdAt: new Date(Date.now() - 30 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Revenue Feature Launch Success",
+        description: "Payment integration generated $25K in first week",
+        category: "Business Impact",
+        impact: "High Impact",
+        userId,
+        createdAt: new Date(Date.now() - 36 * 60 * 60 * 1000),
       },
     ];
     insights.forEach(insight => this.insights.set(insight.id, insight));
 
-    // Sample documentation
+    // Extended documentation data
     const docs: Documentation[] = [
       {
         id: randomUUID(),
-        title: "API Integration Guide",
+        title: "Klaviyo API Integration Guide",
         type: "Technical Spec",
         status: "Complete",
         isAutoGenerated: true,
@@ -160,32 +313,95 @@ export class MemStorage implements IStorage {
       },
       {
         id: randomUUID(),
-        title: "Company Onboarding Playbook",
+        title: "Force of Nature Onboarding Playbook",
         type: "Process Documentation",
         status: "In Progress",
         isAutoGenerated: false,
+        userId,
+        updatedAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Ring Analytics Dashboard Architecture",
+        type: "System Design",
+        status: "Complete",
+        isAutoGenerated: true,
+        userId,
+        updatedAt: new Date(Date.now() - 4 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Harley Davidson CRM User Manual",
+        type: "User Guide",
+        status: "Complete",
+        isAutoGenerated: false,
+        userId,
+        updatedAt: new Date(Date.now() - 6 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Database Schema Documentation",
+        type: "Technical Spec",
+        status: "Complete",
+        isAutoGenerated: true,
+        userId,
+        updatedAt: new Date(Date.now() - 8 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Payment Processing Implementation",
+        type: "Technical Spec",
+        status: "In Progress",
+        isAutoGenerated: false,
+        userId,
+        updatedAt: new Date(Date.now() - 12 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Mobile App Development Standards",
+        type: "Process Documentation",
+        status: "Complete",
+        isAutoGenerated: false,
+        userId,
+        updatedAt: new Date(Date.now() - 18 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "CI/CD Pipeline Configuration",
+        type: "DevOps Guide",
+        status: "Complete",
+        isAutoGenerated: true,
         userId,
         updatedAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
       },
       {
         id: randomUUID(),
-        title: "Client Dashboard Architecture",
-        type: "System Design",
+        title: "Security Best Practices Guide",
+        type: "Security Documentation",
+        status: "In Progress",
+        isAutoGenerated: false,
+        userId,
+        updatedAt: new Date(Date.now() - 30 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "WebSocket Real-time Features",
+        type: "Technical Spec",
         status: "Complete",
         isAutoGenerated: true,
         userId,
-        updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+        updatedAt: new Date(Date.now() - 36 * 60 * 60 * 1000),
       },
     ];
     docs.forEach(doc => this.documentation.set(doc.id, doc));
 
-    // Sample OKRs
+    // Extended OKRs data
     const okrsList: OKR[] = [
       {
         id: randomUUID(),
         title: "Master Klaviyo API Integration",
         category: "Technical Skills",
-        progress: 85,
+        progress: 95,
         target: "End of Month",
         userId,
         createdAt: new Date(),
@@ -194,7 +410,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "Complete Force of Nature Onboarding",
         category: "Company Integration",
-        progress: 60,
+        progress: 85,
         target: "This Week",
         userId,
         createdAt: new Date(),
@@ -203,24 +419,60 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "Launch Attribution Dashboard MVP",
         category: "Product Delivery",
-        progress: 75,
+        progress: 90,
         target: "Next Week",
         userId,
         createdAt: new Date(),
       },
       {
         id: randomUUID(),
-        title: "Establish Susan Strategic Partnership",
+        title: "Establish Strategic Client Partnerships",
+        category: "Leadership Growth",
+        progress: 65,
+        target: "End of Quarter",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Implement CI/CD Best Practices",
+        category: "DevOps Excellence",
+        progress: 78,
+        target: "Next Month",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Achieve 90% Test Coverage",
+        category: "Code Quality",
+        progress: 85,
+        target: "End of Sprint",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Optimize Database Performance",
+        category: "Technical Excellence",
+        progress: 70,
+        target: "Next Quarter",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Lead Junior Developer Mentoring",
         category: "Leadership Growth",
         progress: 45,
-        target: "End of Quarter",
+        target: "Ongoing",
         userId,
         createdAt: new Date(),
       },
     ];
     okrsList.forEach(okr => this.okrs.set(okr.id, okr));
 
-    // Sample achievements
+    // Extended achievements data
     const achievementsList: Achievement[] = [
       {
         id: randomUUID(),
@@ -235,13 +487,61 @@ export class MemStorage implements IStorage {
         title: "Documentation Master",
         description: "Auto-generated docs for 5 consecutive projects",
         icon: "📚",
+        unlockedAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
+        userId,
+      },
+      {
+        id: randomUUID(),
+        title: "Performance Optimizer",
+        description: "Improved API response times by 35%",
+        icon: "⚡",
+        unlockedAt: new Date(Date.now() - 6 * 60 * 60 * 1000),
+        userId,
+      },
+      {
+        id: randomUUID(),
+        title: "Revenue Generator",
+        description: "Features launched generated $50K+ in revenue",
+        icon: "💰",
+        unlockedAt: new Date(Date.now() - 12 * 60 * 60 * 1000),
+        userId,
+      },
+      {
+        id: randomUUID(),
+        title: "Security Guardian",
+        description: "Prevented 5 potential security vulnerabilities",
+        icon: "🛡️",
+        unlockedAt: new Date(Date.now() - 18 * 60 * 60 * 1000),
+        userId,
+      },
+      {
+        id: randomUUID(),
+        title: "DevOps Ninja",
+        description: "Setup automated deployment pipeline",
+        icon: "🥷",
         unlockedAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
+        userId,
+      },
+      {
+        id: randomUUID(),
+        title: "Team Collaborator",
+        description: "Mentored 3 junior developers this month",
+        icon: "🤝",
+        unlockedAt: new Date(Date.now() - 30 * 60 * 60 * 1000),
+        userId,
+      },
+      {
+        id: randomUUID(),
+        title: "Innovation Driver",
+        description: "Proposed and implemented 3 new features",
+        icon: "💡",
+        unlockedAt: new Date(Date.now() - 36 * 60 * 60 * 1000),
         userId,
       },
     ];
     achievementsList.forEach(achievement => this.achievements.set(achievement.id, achievement));
 
-    // Sample integrations
+    // Extended integrations data
     const integrationsList: Integration[] = [
       {
         id: randomUUID(),
@@ -258,13 +558,55 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         name: "Notion",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Linear",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Klaviyo",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Stripe",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Sentry",
         status: "Needs Auth",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Vercel",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "OpenAI",
+        status: "Needs Auth",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Discord",
+        status: "Connected",
         userId,
       },
     ];
     integrationsList.forEach(integration => this.integrations.set(integration.id, integration));
 
-    // Sample next steps
+    // Extended next steps data
     const nextStepsList: NextStep[] = [
       {
         id: randomUUID(),
@@ -284,9 +626,65 @@ export class MemStorage implements IStorage {
       },
       {
         id: randomUUID(),
-        title: "Prepare weekly sync update for Susan",
+        title: "Prepare weekly sync update for leadership team",
         priority: "High Priority",
         estimatedTime: "Est. 30 minutes",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Optimize database queries for Ring Analytics",
+        priority: "High Priority",
+        estimatedTime: "Est. 3 hours",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Implement unit tests for payment processing",
+        priority: "Medium Priority",
+        estimatedTime: "Est. 4 hours",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Set up monitoring for production deployment",
+        priority: "High Priority",
+        estimatedTime: "Est. 2.5 hours",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Create mobile responsive layouts",
+        priority: "Medium Priority",
+        estimatedTime: "Est. 6 hours",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Research AI integration opportunities",
+        priority: "Low Priority",
+        estimatedTime: "Est. 1.5 hours",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Conduct code review for junior developer PRs",
+        priority: "Medium Priority",
+        estimatedTime: "Est. 45 minutes",
+        userId,
+        createdAt: new Date(),
+      },
+      {
+        id: randomUUID(),
+        title: "Update security dependencies",
+        priority: "High Priority",
+        estimatedTime: "Est. 1 hour",
         userId,
         createdAt: new Date(),
       },
