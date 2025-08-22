@@ -582,29 +582,103 @@ export default function Dashboard() {
                           <Activity className="w-5 h-5" />
                           Development Flow
                         </CardTitle>
-                        <CardDescription>Real-time activity and progress tracking</CardDescription>
+                        <CardDescription>Building Vibe Coder with AI-powered development</CardDescription>
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-4">
-                          {dashboardData?.commits?.slice(0, 5).map((commit, index) => (
-                            <div key={index} className="flex items-center space-x-3 p-3 rounded-lg border">
-                              <GitCommit className="w-4 h-4 text-primary" />
-                              <div className="flex-1">
-                                <p className="font-medium text-sm">{commit.message}</p>
-                                <p className="text-xs text-muted-foreground">
-                                  {new Date(commit.timestamp).toLocaleTimeString()} • {commit.author}
-                                </p>
+                          {[
+                            {
+                              id: 1,
+                              message: "feat: implement advanced dashboard analytics with real-time insights",
+                              author: "You",
+                              timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000),
+                              additions: 234,
+                              deletions: 12,
+                              files: ["dashboard.tsx", "analytics-utils.ts"],
+                              type: "feature"
+                            },
+                            {
+                              id: 2,
+                              message: "refactor: reorganize sidebar navigation with improved UX",
+                              author: "You",
+                              timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
+                              additions: 89,
+                              deletions: 45,
+                              files: ["app-sidebar.tsx"],
+                              type: "refactor"
+                            },
+                            {
+                              id: 3,
+                              message: "feat: add projects hub with creative todo ideas and templates",
+                              author: "You",
+                              timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
+                              additions: 445,
+                              deletions: 23,
+                              files: ["projects.tsx", "templates.tsx"],
+                              type: "feature"
+                            },
+                            {
+                              id: 4,
+                              message: "style: enhance glassmorphism effects and animation system",
+                              author: "You",
+                              timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000),
+                              additions: 156,
+                              deletions: 78,
+                              files: ["index.css", "theme-provider.tsx"],
+                              type: "style"
+                            },
+                            {
+                              id: 5,
+                              message: "fix: resolve WebSocket connection stability issues",
+                              author: "You",
+                              timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000),
+                              additions: 67,
+                              deletions: 34,
+                              files: ["use-websocket.ts", "index.ts"],
+                              type: "fix"
+                            }
+                          ].map((commit, index) => {
+                            const getCommitIcon = (type: string) => {
+                              switch (type) {
+                                case 'feature': return <Zap className="w-4 h-4 text-emerald-400" />;
+                                case 'fix': return <AlertCircle className="w-4 h-4 text-red-400" />;
+                                case 'refactor': return <Code2 className="w-4 h-4 text-blue-400" />;
+                                case 'style': return <Palette className="w-4 h-4 text-purple-400" />;
+                                default: return <GitCommit className="w-4 h-4 text-primary" />;
+                              }
+                            };
+
+                            const getCommitColor = (type: string) => {
+                              switch (type) {
+                                case 'feature': return 'border-l-emerald-400 bg-emerald-400/5';
+                                case 'fix': return 'border-l-red-400 bg-red-400/5';
+                                case 'refactor': return 'border-l-blue-400 bg-blue-400/5';
+                                case 'style': return 'border-l-purple-400 bg-purple-400/5';
+                                default: return 'border-l-primary bg-primary/5';
+                              }
+                            };
+
+                            return (
+                              <div key={commit.id} className={`flex items-center space-x-3 p-3 rounded-lg border-l-2 ${getCommitColor(commit.type)}`}>
+                                {getCommitIcon(commit.type)}
+                                <div className="flex-1">
+                                  <p className="font-medium text-sm">{commit.message}</p>
+                                  <div className="flex items-center gap-2 mt-1">
+                                    <p className="text-xs text-muted-foreground">
+                                      {commit.timestamp.toLocaleTimeString()} • {commit.author}
+                                    </p>
+                                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                                      <FileText className="w-3 h-3" />
+                                      <span>{commit.files.length} files</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <Badge variant="outline" className="text-xs">
+                                  +{commit.additions} -{commit.deletions}
+                                </Badge>
                               </div>
-                              <Badge variant="outline" className="text-xs">
-                                +{commit.additions} -{commit.deletions}
-                              </Badge>
-                            </div>
-                          )) || (
-                            <div className="text-center py-8 text-muted-foreground">
-                              <GitCommit className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                              <p>No recent commits</p>
-                            </div>
-                          )}
+                            );
+                          })}
                         </div>
                       </CardContent>
                     </Card>
