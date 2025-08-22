@@ -39,7 +39,27 @@ import { Separator } from "@/components/ui/separator";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 // Navigation items structure
-const navigationItems = [
+interface SubItem {
+  title: string;
+  url: string;
+  isActive?: boolean;
+}
+
+interface NavItem {
+  title: string;
+  url: string;
+  icon: any;
+  isActive?: boolean;
+  badge?: string;
+  subItems?: SubItem[];
+}
+
+interface NavGroup {
+  title: string;
+  items: NavItem[];
+}
+
+const navigationItems: NavGroup[] = [
   {
     title: "Overview",
     items: [
@@ -140,7 +160,7 @@ export function AppSidebar() {
     items: group.items.map(item => ({
       ...item,
       isActive: location.pathname === item.url,
-      subItems: item.subItems?.map(subItem => ({
+      subItems: item.subItems?.map((subItem: SubItem) => ({
         ...subItem,
         isActive: location.pathname === subItem.url
       }))
@@ -287,7 +307,7 @@ export function AppSidebar() {
                     {item.subItems && !isCollapsed && expandedGroups.has(item.title) && (
                       <SidebarMenuSub>
                         <AnimatePresence>
-                          {item.subItems.map((subItem, subIndex) => (
+                          {item.subItems.map((subItem: SubItem, subIndex: number) => (
                             <motion.div
                               key={subItem.title}
                               initial={{ opacity: 0, height: 0 }}

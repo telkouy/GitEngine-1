@@ -65,6 +65,7 @@ export function useWebSocket({
 
       ws.current.onerror = (error) => {
         console.error('WebSocket error:', error);
+        // Don't throw or create unhandled rejections
       };
     } catch (error) {
       console.error('Failed to create WebSocket connection:', error);

@@ -1,9 +1,11 @@
 
 import { motion } from "framer-motion";
-import { Archive } from "lucide-react";
+import { Archive, Calendar, GitBranch, CheckCircle } from "lucide-react";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function ProjectArchive() {
   return (
@@ -43,9 +45,70 @@ export default function ProjectArchive() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-center py-12 text-muted-foreground">
-                    <Archive className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <p>No archived projects yet</p>
+                  <div className="space-y-6">
+                    {/* Sample archived projects */}
+                    {[
+                      {
+                        id: '1',
+                        name: 'Legacy CRM System',
+                        description: 'Previous customer relationship management system',
+                        completedDate: '2023-08-15',
+                        status: 'Archived',
+                        language: 'PHP',
+                        commits: 127
+                      },
+                      {
+                        id: '2', 
+                        name: 'Old Analytics Dashboard',
+                        description: 'Former analytics and reporting platform',
+                        completedDate: '2023-06-22',
+                        status: 'Archived',
+                        language: 'React',
+                        commits: 89
+                      }
+                    ].map((project, index) => (
+                      <motion.div
+                        key={project.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        className="p-6 rounded-xl border border-border/40 bg-gradient-to-r from-background/50 to-background/80 backdrop-blur-sm hover:border-border/60 transition-all duration-300"
+                      >
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-2">
+                              <Archive className="w-5 h-5 text-muted-foreground" />
+                              <h3 className="font-semibold text-foreground">
+                                {project.name}
+                              </h3>
+                              <Badge variant="secondary" className="bg-gray-500/20 text-gray-400">
+                                {project.status}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground mb-3">
+                              {project.description}
+                            </p>
+                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                              <div className="flex items-center gap-1">
+                                <GitBranch className="w-4 h-4" />
+                                <span>{project.language}</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <CheckCircle className="w-4 h-4" />
+                                <span>{project.commits} commits</span>
+                              </div>
+                              <div className="flex items-center gap-1">
+                                <Calendar className="w-4 h-4" />
+                                <span>Archived: {new Date(project.completedDate).toLocaleDateString()}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <Button variant="outline" size="sm">
+                            View Details
+                          </Button>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
