@@ -1,15 +1,17 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import { CommandPalette } from '@/components/ui/command-palette';
+import { ErrorBoundary } from '@/components/ui/error-boundary';
+import { queryClient } from "@/lib/queryClient";
 import Dashboard from '@/pages/dashboard';
 import Analytics from '@/pages/analytics';
 import Projects from '@/pages/projects';
 import ActiveProjects from '@/pages/projects/active';
-import ArchivedProjects from '@/pages/projects/archive';
+import ProjectArchive from '@/pages/projects/archive';
 import ProjectTemplates from '@/pages/projects/templates';
 import CodeReviews from '@/pages/code-reviews';
 import GitIntegration from '@/pages/git-integration';
@@ -38,26 +40,28 @@ function App() {
           <CommandPalette />
           <Toaster />
           <Router>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/analytics" element={<Analytics />} />
-              <Route path="/ai-auto-docs" element={<AIAutoDocsPage />} />
-              <Route path="/ai-insights" element={<AIInsightsPage />} />
-              <Route path="/ai-reviews" element={<AIReviewsPage />} />
-              <Route path="/ai-performance" element={<AIPerformancePage />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/active" element={<ActiveProjects />} />
-              <Route path="/projects/archive" element={<ArchivedProjects />} />
-              <Route path="/projects/templates" element={<ProjectTemplates />} />
-              <Route path="/reviews" element={<CodeReviews />} />
-              <Route path="/git" element={<GitIntegration />} />
-              <Route path="/okrs" element={<OKRs />} />
-              <Route path="/achievements" element={<Achievements />} />
-              <Route path="/documentation" element={<Documentation />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/analytics" element={<Analytics />} />
+                <Route path="/ai-auto-docs" element={<AIAutoDocsPage />} />
+                <Route path="/ai-insights" element={<AIInsightsPage />} />
+                <Route path="/ai-reviews" element={<AIReviewsPage />} />
+                <Route path="/ai-performance" element={<AIPerformancePage />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/active" element={<ActiveProjects />} />
+                <Route path="/projects/archive" element={<ProjectArchive />} />
+                <Route path="/projects/templates" element={<ProjectTemplates />} />
+                <Route path="/reviews" element={<CodeReviews />} />
+                <Route path="/git" element={<GitIntegration />} />
+                <Route path="/okrs" element={<OKRs />} />
+                <Route path="/achievements" element={<Achievements />} />
+                <Route path="/documentation" element={<Documentation />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </ErrorBoundary>
           </Router>
         </TooltipProvider>
       </ThemeProvider>
