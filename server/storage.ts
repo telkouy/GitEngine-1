@@ -68,7 +68,7 @@ export class MemStorage implements IStorage {
     };
     this.users.set(userId, user);
 
-    // Daily stats
+    // Daily stats with realistic variations
     const dailyStats: DailyStats = {
       id: randomUUID(),
       commitsToday: 12,
@@ -80,12 +80,12 @@ export class MemStorage implements IStorage {
     };
     this.dailyStats.set(userId, dailyStats);
 
-    // Extended commits data
+    // Extended commits data with more variety
     const commits: Commit[] = [
       {
         id: randomUUID(),
         hash: "a1b2c3d",
-        message: "Add Klaviyo API integration for client dashboard",
+        message: "feat: Add Klaviyo API integration for client dashboard",
         project: "Ring Analytics Dashboard",
         impact: "Revenue Attribution",
         valueScore: 9,
@@ -95,27 +95,27 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         hash: "e4f5g6h",
-        message: "Implement real-time campaign performance tracking",
+        message: "feat: Implement real-time campaign performance tracking",
         project: "Harley Davidson CRM",
         impact: "Campaign Optimization",
         valueScore: 8,
         userId,
-        createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+        createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000),
       },
       {
         id: randomUUID(),
         hash: "i7j8k9l",
-        message: "Fix async communication bug in notification system",
+        message: "fix: Resolve async communication bug in notification system",
         project: "Internal Tools",
         impact: "Team Productivity",
         valueScore: 7,
         userId,
-        createdAt: new Date(Date.now() - 3 * 60 * 60 * 1000), // 3 hours ago
+        createdAt: new Date(Date.now() - 3 * 60 * 60 * 1000),
       },
       {
         id: randomUUID(),
         hash: "m3n4o5p",
-        message: "Add TypeScript interfaces for data models",
+        message: "refactor: Add TypeScript interfaces for data models",
         project: "Force of Nature Platform",
         impact: "Code Quality",
         valueScore: 6,
@@ -125,7 +125,7 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         hash: "q6r7s8t",
-        message: "Optimize database queries for user analytics",
+        message: "perf: Optimize database queries for user analytics",
         project: "Ring Analytics Dashboard",
         impact: "Performance",
         valueScore: 9,
@@ -135,7 +135,7 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         hash: "u9v0w1x",
-        message: "Create responsive mobile layout for dashboard",
+        message: "feat: Create responsive mobile layout for dashboard",
         project: "Harley Davidson CRM",
         impact: "User Experience",
         valueScore: 8,
@@ -145,7 +145,7 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         hash: "y2z3a4b",
-        message: "Implement automated testing suite",
+        message: "test: Implement automated testing suite",
         project: "Internal Tools",
         impact: "Code Quality",
         valueScore: 7,
@@ -155,7 +155,7 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         hash: "c5d6e7f",
-        message: "Add multi-language support for client portals",
+        message: "feat: Add multi-language support for client portals",
         project: "Force of Nature Platform",
         impact: "Internationalization",
         valueScore: 8,
@@ -165,7 +165,7 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         hash: "g8h9i0j",
-        message: "Integrate Stripe payment processing",
+        message: "feat: Integrate Stripe payment processing",
         project: "Ring Analytics Dashboard",
         impact: "Revenue Features",
         valueScore: 9,
@@ -175,17 +175,17 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         hash: "k1l2m3n",
-        message: "Setup CI/CD pipeline with GitHub Actions",
+        message: "ci: Setup CI/CD pipeline with GitHub Actions",
         project: "Harley Davidson CRM",
         impact: "DevOps",
         valueScore: 7,
         userId,
-        createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+        createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
       },
       {
         id: randomUUID(),
         hash: "o4p5q6r",
-        message: "Add WebSocket support for real-time updates",
+        message: "feat: Add WebSocket support for real-time updates",
         project: "Internal Tools",
         impact: "Real-time Features",
         valueScore: 8,
@@ -195,17 +195,98 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         hash: "s7t8u9v",
-        message: "Create admin dashboard for user management",
+        message: "feat: Create admin dashboard for user management",
         project: "Force of Nature Platform",
         impact: "Admin Tools",
         valueScore: 6,
         userId,
         createdAt: new Date(Date.now() - 36 * 60 * 60 * 1000),
       },
+      // Additional commits for more realistic data
+      {
+        id: randomUUID(),
+        hash: "z9x8v7w",
+        message: "fix: Handle edge case in email validation",
+        project: "Ring Analytics Dashboard",
+        impact: "Bug Fix",
+        valueScore: 5,
+        userId,
+        createdAt: new Date(Date.now() - 42 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "n5m6l7k",
+        message: "docs: Update API documentation with examples",
+        project: "Force of Nature Platform",
+        impact: "Documentation",
+        valueScore: 4,
+        userId,
+        createdAt: new Date(Date.now() - 48 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "p2q3r4s",
+        message: "style: Improve dark mode contrast ratios",
+        project: "Harley Davidson CRM",
+        impact: "Accessibility",
+        valueScore: 6,
+        userId,
+        createdAt: new Date(Date.now() - 54 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "t8u9v0w",
+        message: "feat: Add export functionality for reports",
+        project: "Ring Analytics Dashboard",
+        impact: "Feature Enhancement",
+        valueScore: 7,
+        userId,
+        createdAt: new Date(Date.now() - 60 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "b4c5d6e",
+        message: "refactor: Extract reusable chart components",
+        project: "Internal Tools",
+        impact: "Code Reusability",
+        valueScore: 6,
+        userId,
+        createdAt: new Date(Date.now() - 66 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "f1g2h3i",
+        message: "security: Update dependencies and fix vulnerabilities",
+        project: "Force of Nature Platform",
+        impact: "Security",
+        valueScore: 8,
+        userId,
+        createdAt: new Date(Date.now() - 72 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "j7k8l9m",
+        message: "perf: Implement lazy loading for dashboard widgets",
+        project: "Harley Davidson CRM",
+        impact: "Performance",
+        valueScore: 7,
+        userId,
+        createdAt: new Date(Date.now() - 78 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        hash: "x3y4z5a",
+        message: "feat: Add data filtering and search capabilities",
+        project: "Ring Analytics Dashboard",
+        impact: "User Experience",
+        valueScore: 8,
+        userId,
+        createdAt: new Date(Date.now() - 84 * 60 * 60 * 1000),
+      },
     ];
     commits.forEach(commit => this.commits.set(commit.id, commit));
 
-    // Extended AI insights data
+    // Extended AI insights data with more categories
     const insights: Insight[] = [
       {
         id: randomUUID(),
@@ -247,7 +328,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "Mobile User Experience Boost",
         description: "Responsive design changes increased mobile engagement by 22%",
-        category: "Business Impact",
+        category: "User Experience",
         impact: "Medium Impact",
         userId,
         createdAt: new Date(Date.now() - 8 * 60 * 60 * 1000),
@@ -265,7 +346,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "Deployment Frequency Increase",
         description: "CI/CD improvements enabled 3x faster deployment cycles",
-        category: "Performance",
+        category: "DevOps",
         impact: "High Impact",
         userId,
         createdAt: new Date(Date.now() - 18 * 60 * 60 * 1000),
@@ -274,7 +355,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "Security Vulnerability Prevention",
         description: "Proactive code review caught 5 potential security issues",
-        category: "Code Quality",
+        category: "Security",
         impact: "High Impact",
         userId,
         createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
@@ -283,7 +364,7 @@ export class MemStorage implements IStorage {
         id: randomUUID(),
         title: "Cross-Team Knowledge Transfer",
         description: "Documentation efforts reduced onboarding time by 40%",
-        category: "Business Impact",
+        category: "Team Collaboration",
         impact: "Medium Impact",
         userId,
         createdAt: new Date(Date.now() - 30 * 60 * 60 * 1000),
@@ -296,6 +377,79 @@ export class MemStorage implements IStorage {
         impact: "High Impact",
         userId,
         createdAt: new Date(Date.now() - 36 * 60 * 60 * 1000),
+      },
+      // Additional insights for more variety
+      {
+        id: randomUUID(),
+        title: "Technical Debt Reduction Opportunity",
+        description: "Legacy components in dashboard could be modernized to improve maintainability",
+        category: "Code Quality",
+        impact: "Medium Impact",
+        userId,
+        createdAt: new Date(Date.now() - 42 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "User Engagement Analytics",
+        description: "New dashboard features show 35% increase in daily active users",
+        category: "Analytics",
+        impact: "High Impact",
+        userId,
+        createdAt: new Date(Date.now() - 48 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Error Handling Enhancement",
+        description: "Improved error boundaries reduced client-side crashes by 60%",
+        category: "User Experience",
+        impact: "High Impact",
+        userId,
+        createdAt: new Date(Date.now() - 54 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Performance Budget Alert",
+        description: "Bundle size increased by 15% - consider code splitting strategies",
+        category: "Performance",
+        impact: "Medium Impact",
+        userId,
+        createdAt: new Date(Date.now() - 60 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Accessibility Compliance Achievement",
+        description: "Recent updates brought WCAG compliance to 98% across all pages",
+        category: "Accessibility",
+        impact: "Medium Impact",
+        userId,
+        createdAt: new Date(Date.now() - 66 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "API Rate Limit Optimization",
+        description: "Smart caching reduced external API calls by 45%",
+        category: "Performance",
+        impact: "High Impact",
+        userId,
+        createdAt: new Date(Date.now() - 72 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Team Velocity Improvement",
+        description: "Sprint completion rate increased to 95% after workflow optimization",
+        category: "Team Collaboration",
+        impact: "High Impact",
+        userId,
+        createdAt: new Date(Date.now() - 78 * 60 * 60 * 1000),
+      },
+      {
+        id: randomUUID(),
+        title: "Data Visualization Enhancement",
+        description: "Interactive charts improved user data comprehension by 40%",
+        category: "User Experience",
+        impact: "Medium Impact",
+        userId,
+        createdAt: new Date(Date.now() - 84 * 60 * 60 * 1000),
       },
     ];
     insights.forEach(insight => this.insights.set(insight.id, insight));
@@ -541,7 +695,7 @@ export class MemStorage implements IStorage {
     ];
     achievementsList.forEach(achievement => this.achievements.set(achievement.id, achievement));
 
-    // Extended integrations data
+    // Extended integrations data with more services
     const integrationsList: Integration[] = [
       {
         id: randomUUID(),
@@ -600,6 +754,66 @@ export class MemStorage implements IStorage {
       {
         id: randomUUID(),
         name: "Discord",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Figma",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Jira",
+        status: "Disconnected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "AWS",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Docker Hub",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "MongoDB Atlas",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "PostHog",
+        status: "Needs Auth",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Mixpanel",
+        status: "Disconnected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Zapier",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Supabase",
+        status: "Connected",
+        userId,
+      },
+      {
+        id: randomUUID(),
+        name: "Tailwind UI",
         status: "Connected",
         userId,
       },
