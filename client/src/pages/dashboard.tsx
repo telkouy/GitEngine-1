@@ -15,6 +15,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CampaignVelocityEngine } from "@/components/dashboard/campaign-velocity-engine";
 import type { User, DailyStats, Commit, Insight, Documentation, OKR, Achievement, Integration, NextStep } from "@shared/schema";
 
 interface DashboardData {
@@ -51,7 +52,7 @@ interface DataInsight {
 export default function Dashboard() {
   const userId = "demo-user";
   const [selectedMetric, setSelectedMetric] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'overview' | 'detailed' | 'insights'>('overview');
+  const [viewMode, setViewMode] = useState<'overview' | 'detailed' | 'insights' | 'velocity'>('overview');
   const [timeRange, setTimeRange] = useState<'today' | 'week' | 'month'>('today');
 
   // WebSocket connection for real-time updates
@@ -557,11 +558,15 @@ export default function Dashboard() {
               </AnimatePresence>
 
               {/* Enhanced Content Tabs */}
-              <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'overview' | 'detailed' | 'insights')} className="space-y-6">
-                <TabsList className="grid w-full grid-cols-3">
+              <Tabs value={viewMode} onValueChange={(value) => setViewMode(value as 'overview' | 'detailed' | 'insights' | 'velocity')} className="space-y-6">
+                <TabsList className="grid w-full grid-cols-4">
                   <TabsTrigger value="overview" className="flex items-center gap-2">
                     <BarChart3 className="w-4 h-4" />
                     Overview
+                  </TabsTrigger>
+                  <TabsTrigger value="velocity" className="flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    Velocity
                   </TabsTrigger>
                   <TabsTrigger value="detailed" className="flex items-center gap-2">
                     <Activity className="w-4 h-4" />
@@ -572,6 +577,10 @@ export default function Dashboard() {
                     AI Insights
                   </TabsTrigger>
                 </TabsList>
+
+                <TabsContent value="velocity" className="space-y-6">
+                  <CampaignVelocityEngine />
+                </TabsContent>
 
                 <TabsContent value="overview" className="space-y-6">
                   <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
