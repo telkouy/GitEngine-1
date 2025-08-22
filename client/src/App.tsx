@@ -24,6 +24,12 @@ import AIReviewsPage from '@/pages/ai-reviews';
 import AIPerformancePage from '@/pages/ai-performance';
 import Settings from '@/pages/settings';
 import CampaignVelocityPage from '@/pages/campaign-velocity';
+import GitHubPage from '@/pages/github';
+import AICodeGenPage from '@/pages/ai-code-gen';
+import TeamSyncPage from '@/pages/team-sync';
+import AIMarketResearchPage from '@/pages/ai-market-research';
+import CompetitorAnalysisPage from '@/pages/competitor-analysis';
+import RevenuePredictorPage from '@/pages/revenue-predictor';
 import NotFound from '@/pages/not-found';
 
 // Global error handler for unhandled promise rejections
@@ -61,6 +67,12 @@ function App() {
                 <Route path="/documentation" element={<Documentation />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/campaign-velocity" element={<CampaignVelocityPage />} />
+                <Route path="/github" element={<GitHubPage />} />
+                <Route path="/ai-code-gen" element={<AICodeGenPage />} />
+                <Route path="/team-sync" element={<TeamSyncPage />} />
+                <Route path="/ai-market-research" element={<AIMarketResearchPage />} />
+                <Route path="/competitor-analysis" element={<CompetitorAnalysisPage />} />
+                <Route path="/revenue-predictor" element={<RevenuePredictorPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </ErrorBoundary>
