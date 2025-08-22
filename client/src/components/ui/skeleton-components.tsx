@@ -93,6 +93,28 @@ export function CardSkeleton() {
   );
 }
 
+export function StatsCardSkeleton() {
+  return (
+    <div className="metric-card">
+      <div className="flex items-center justify-between mb-6">
+        <div className="relative">
+          <Skeleton className="w-14 h-14 rounded-2xl" />
+          <Skeleton className="absolute top-0 right-0 w-4 h-4 rounded-full" />
+        </div>
+        <Skeleton className="w-8 h-8 rounded-full" />
+      </div>
+
+      <div className="flex-1 flex flex-col justify-end">
+        <div className="text-right mb-2">
+          <Skeleton className="h-10 w-16 mb-2" />
+          <Skeleton className="h-4 w-20" />
+        </div>
+        <Skeleton className="w-full h-1 rounded-full" />
+      </div>
+    </div>
+  );
+}
+
 export function InsightSkeleton() {
   return (
     <motion.div 
