@@ -17,6 +17,7 @@ import {
   User,
   Search,
   ChevronRight,
+  Sparkles,
 } from "lucide-react";
 import { NotificationCenter } from "@/components/ui/notification-center";
 import {
@@ -124,6 +125,35 @@ export function AppSidebar() {
       ],
     },
     {
+      title: "AI Intelligence",
+      items: [
+        {
+          title: "AI Auto-Generated Docs",
+          url: "/ai-auto-docs",
+          icon: Zap,
+          badge: docsCount > 0 ? docsCount.toString() : "New",
+        },
+        {
+          title: "AI Code Insights",
+          url: "/ai-insights",
+          icon: Sparkles,
+          badge: recentInsights > 0 ? "Active" : undefined,
+        },
+        {
+          title: "AI Code Reviews",
+          url: "/ai-reviews",
+          icon: Code2,
+          badge: "Coming Soon",
+        },
+        {
+          title: "AI Performance Analysis",
+          url: "/ai-performance",
+          icon: BarChart3,
+          badge: "Beta",
+        },
+      ],
+    },
+    {
       title: "Development",
       items: [
         {
@@ -173,15 +203,14 @@ export function AppSidebar() {
           title: "Documentation",
           url: "/documentation",
           icon: BookOpen,
-          badge: docsCount > 0 ? docsCount.toString() : undefined,
           subItems: [
             {
-              title: "AI Auto-Generated",
-              url: "/ai-auto-docs",
+              title: "Manual Documentation",
+              url: "/documentation",
             },
             {
-              title: "Manual Docs",
-              url: "/documentation",
+              title: "API Reference",
+              url: "/api-docs",
             },
           ],
         },
