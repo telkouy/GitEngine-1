@@ -15,7 +15,7 @@ export default function CampaignVelocityPage() {
                 <div>
                   <h1 className="text-3xl font-bold gradient-text">Campaign Velocity Engine</h1>
                   <p className="text-muted-foreground mt-2">
-                    Track your concept-to-launch pipeline in real-time
+                    Track your products from concept to launch using Force of Vibing methodology
                   </p>
                 </div>
               </div>

@@ -50,7 +50,7 @@ export function CampaignVelocityEngine() {
   const [campaigns, setCampaigns] = useState<Campaign[]>([
     {
       id: '1',
-      name: 'AI Dashboard Analytics',
+      name: 'Vibe Coder Dashboard',
       stage: 'test',
       progress: 85,
       timeInStage: 2,
@@ -61,18 +61,18 @@ export function CampaignVelocityEngine() {
     },
     {
       id: '2',
-      name: 'User Onboarding Flow',
+      name: 'AI-Powered Code Reviews',
       stage: 'prototype',
       progress: 60,
       timeInStage: 4,
       totalTime: 8,
       priority: 'high',
-      type: 'optimization',
+      type: 'feature',
       estimatedCompletion: 6
     },
     {
       id: '3',
-      name: 'Performance Monitoring',
+      name: 'Smart Documentation Generator',
       stage: 'concept',
       progress: 25,
       timeInStage: 1,
@@ -83,13 +83,13 @@ export function CampaignVelocityEngine() {
     },
     {
       id: '4',
-      name: 'Marketing Automation',
+      name: 'Real-time Analytics Engine',
       stage: 'launch',
       progress: 100,
       timeInStage: 1,
       totalTime: 18,
       priority: 'high',
-      type: 'marketing',
+      type: 'feature',
       estimatedCompletion: 0
     }
   ]);
@@ -201,7 +201,7 @@ export function CampaignVelocityEngine() {
             Campaign Velocity Engine
           </CardTitle>
           <CardDescription>
-            Lightning-fast concept to launch tracking - Force of Nature methodology
+            Lightning-fast concept to launch tracking - Force of Vibing methodology for your products
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -212,12 +212,12 @@ export function CampaignVelocityEngine() {
                 <div className="text-3xl font-bold gradient-text mb-1">
                   {velocityMetrics.averageConceptToLaunch.toFixed(1)}h
                 </div>
-                <div className="text-xs text-muted-foreground mb-2">Our Average</div>
+                <div className="text-xs text-muted-foreground mb-2">Your Products Average</div>
                 <div className="text-lg text-muted-foreground">vs</div>
                 <div className="text-2xl font-medium text-muted-foreground mt-2">
                   {Math.round(velocityMetrics.industryAverage / 24)}d
                 </div>
-                <div className="text-xs text-muted-foreground">Industry Average</div>
+                <div className="text-xs text-muted-foreground">Industry Standard</div>
               </div>
             </div>
 
@@ -292,10 +292,10 @@ export function CampaignVelocityEngine() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Target className="w-5 h-5" />
-            Live Campaign Pipeline
+            Live Product Pipeline
           </CardTitle>
           <CardDescription>
-            Real-time tracking of campaigns through the Force of Nature methodology
+            Real-time tracking of your products through the Force of Vibing methodology
           </CardDescription>
         </CardHeader>
         <CardContent>

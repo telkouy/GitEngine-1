@@ -139,7 +139,7 @@ export function AppSidebar() {
           ],
         },
         {
-          title: "Campaign Velocity",
+          title: "Product Velocity",
           url: "/campaign-velocity",
           icon: Zap,
           badge: "Live",
