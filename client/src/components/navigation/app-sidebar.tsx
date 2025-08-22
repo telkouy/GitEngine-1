@@ -104,10 +104,10 @@ export function AppSidebar() {
   // Dummy data for docsCount to show badge, replace with actual API call
   const docsCount = 5; 
 
-  // Dynamic navigation items with real data  
+  // Dynamic navigation items with improved organization
   const navigationItems: NavGroup[] = [
     {
-      title: "Overview",
+      title: "Command Center",
       items: [
         {
           title: "Dashboard",
@@ -117,44 +117,37 @@ export function AppSidebar() {
           badge: "Live",
         },
         {
-          title: "Analytics",
+          title: "Analytics Hub",
           url: "/analytics",
           icon: BarChart3,
-          badge: dashboardData ? "Beta" : undefined,
+          badge: dashboardData ? "Active" : undefined,
         },
       ],
     },
     {
-      title: "AI Intelligence",
+      title: "AI Workspace",
       items: [
         {
-          title: "AI Auto-Generated Docs",
-          url: "/ai-auto-docs",
-          icon: Zap,
-          badge: docsCount > 0 ? docsCount.toString() : "New",
-        },
-        {
-          title: "AI Code Insights",
+          title: "AI Assistant",
           url: "/ai-insights",
           icon: Sparkles,
-          badge: recentInsights > 0 ? "Active" : undefined,
+          badge: recentInsights > 0 ? "Active" : "New",
+          subItems: [
+            { title: "Code Insights", url: "/ai-insights" },
+            { title: "Performance Analysis", url: "/ai-performance" },
+            { title: "Code Reviews", url: "/ai-reviews" },
+          ],
         },
         {
-          title: "AI Code Reviews",
-          url: "/ai-reviews",
-          icon: Code2,
-          badge: "Coming Soon",
-        },
-        {
-          title: "AI Performance Analysis",
-          url: "/ai-performance",
-          icon: BarChart3,
-          badge: "Beta",
+          title: "Documentation AI",
+          url: "/ai-auto-docs",
+          icon: Zap,
+          badge: docsCount > 0 ? docsCount.toString() : "Smart",
         },
       ],
     },
     {
-      title: "Development",
+      title: "Development Hub",
       items: [
         {
           title: "Projects",
@@ -162,7 +155,7 @@ export function AppSidebar() {
           icon: FolderKanban,
           subItems: [
             { title: "Active Projects", url: "/projects/active" },
-            { title: "Archive", url: "/projects/archive" },
+            { title: "Project Archive", url: "/projects/archive" },
             { title: "Templates", url: "/projects/templates" },
           ],
         },
@@ -176,14 +169,24 @@ export function AppSidebar() {
           title: "Git Integration",
           url: "/git",
           icon: GitBranch,
+          badge: "Connected",
+        },
+        {
+          title: "Documentation",
+          url: "/documentation",
+          icon: BookOpen,
+          subItems: [
+            { title: "Manual Docs", url: "/documentation" },
+            { title: "API Reference", url: "/api-docs" },
+          ],
         },
       ],
     },
     {
-      title: "Goals & Growth",
+      title: "Growth & Goals",
       items: [
         {
-          title: "OKRs",
+          title: "OKRs & Objectives",
           url: "/okrs",
           icon: Target,
           badge: activeOKRs > 0 ? activeOKRs.toString() : undefined,
@@ -197,23 +200,8 @@ export function AppSidebar() {
       ],
     },
     {
-      title: "Resources",
+      title: "Configuration",
       items: [
-        {
-          title: "Documentation",
-          url: "/documentation",
-          icon: BookOpen,
-          subItems: [
-            {
-              title: "Manual Documentation",
-              url: "/documentation",
-            },
-            {
-              title: "API Reference",
-              url: "/api-docs",
-            },
-          ],
-        },
         {
           title: "Settings",
           url: "/settings",
