@@ -178,16 +178,54 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Next steps endpoints
+  // Next steps
   app.get("/api/next-steps/:userId", async (req, res) => {
-    try {
-      const { userId } = req.params;
-      const nextSteps = await storage.getNextSteps(userId);
-      res.json(nextSteps);
-    } catch (error) {
-      console.error("Error fetching next steps:", error);
-      res.status(500).json({ message: "Internal server error" });
-    }
+    const { userId } = req.params;
+    const nextSteps = await storage.getNextSteps(userId);
+    res.json(nextSteps);
+  });
+
+  // Project templates
+  app.get("/api/projects/templates", async (req, res) => {
+    const templates = await storage.getProjectTemplates();
+    res.json(templates);
+  });
+
+  // Active projects  
+  app.get("/api/projects/active", async (req, res) => {
+    const projects = await storage.getActiveProjects();
+    res.json(projects);
+  });
+
+  // Archived projects
+  app.get("/api/projects/archive", async (req, res) => {
+    const projects = await storage.getArchivedProjects();
+    res.json(projects);
+  });
+
+  // Analytics data
+  app.get("/api/analytics", async (req, res) => {
+    const analytics = await storage.getAnalyticsData();
+    res.json(analytics);
+  });
+
+  // Code reviews
+  app.get("/api/code-reviews", async (req, res) => {
+    const reviews = await storage.getCodeReviews();
+    res.json(reviews);
+  });
+
+  // Git integration data
+  app.get("/api/git-integration", async (req, res) => {
+    res.json({
+      connectedRepos: 8,
+      totalCommits: 1247,
+      branches: 23,
+      pullRequests: { open: 5, merged: 142, closed: 8 },
+      contributors: ["Alex Johnson", "Sarah Chen", "David Kim", "Emma Wilson"],
+      lastSync: new Date(),
+      webhooksActive: true
+    });
   });
 
   // Commits endpoint

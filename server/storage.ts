@@ -286,7 +286,7 @@ export class MemStorage implements IStorage {
     ];
     commits.forEach(commit => this.commits.set(commit.id, commit));
 
-    // Extended AI insights data with more categories
+    // Extended mock insights data with more variety for all categories
     const insights: Insight[] = [
       {
         id: randomUUID(),
