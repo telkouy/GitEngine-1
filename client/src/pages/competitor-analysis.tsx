@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -36,36 +35,36 @@ export default function CompetitorAnalysisPage() {
                 </div>
                 <CardTitle className="text-2xl gradient-text">Competitor Analysis</CardTitle>
                 <p className="text-muted-foreground mt-2">
-                  Espionaje competitivo con IA para dominar el mercado 🕵️
+                  AI-powered competitive espionage to dominate the market 🕵️
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold mb-3">Ventaja competitiva total:</h3>
+                  <h3 className="text-lg font-semibold mb-3">Total competitive advantage:</h3>
                   <div className="grid gap-3 md:grid-cols-2">
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <BarChart3 className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Métricas comparativas</span>
+                      <span className="text-sm">Comparative metrics</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Shield className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Análisis de fortalezas</span>
+                      <span className="text-sm">Strength analysis</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Eye className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Monitoreo continuo</span>
+                      <span className="text-sm">Continuous monitoring</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Zap className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Alertas instantáneas</span>
+                      <span className="text-sm">Instant alerts</span>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex justify-center pt-4">
                   <Button disabled className="gap-2">
                     <Sparkles className="w-4 h-4" />
-                    Estudiando la competencia...
+                    Studying the competition...
                   </Button>
                 </div>
               </CardContent>

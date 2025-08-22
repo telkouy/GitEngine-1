@@ -41,23 +41,23 @@ export default function AICodeGenPage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold mb-3">Superpoderes que tendrás:</h3>
+                  <h3 className="text-lg font-semibold mb-3">Superpowers you'll have:</h3>
                   <div className="grid gap-3 md:grid-cols-2">
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Cpu className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Generación inteligente</span>
+                      <span className="text-sm">Intelligent generation</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Zap className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Velocidad extrema</span>
+                      <span className="text-sm">Extreme speed</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Code2 className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Múltiples lenguajes</span>
+                      <span className="text-sm">Multiple languages</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Sparkles className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Optimización automática</span>
+                      <span className="text-sm">Automatic optimization</span>
                     </div>
                   </div>
                 </div>

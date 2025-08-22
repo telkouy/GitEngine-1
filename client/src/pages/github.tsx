@@ -1,11 +1,10 @@
-
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { GitBranch, Sparkles, Code2, Users, Zap } from "lucide-react";
+import { GitBranch, Sparkles, Code2, Users, Zap, GitPullRequest, Activity, Shield } from "lucide-react";
 
 export default function GitHubPage() {
   return (
@@ -35,37 +34,37 @@ export default function GitHubPage() {
                   </div>
                 </div>
                 <CardTitle className="text-2xl gradient-text">GitHub Integration</CardTitle>
-                <p className="text-muted-foreground mt-2">
-                  Próximamente estará lista para el vibe 🚀
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="text-center">
-                  <h3 className="text-lg font-semibold mb-3">¿Qué podrás hacer?</h3>
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
-                      <Code2 className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Sync automático de repos</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
-                      <Users className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Colaboración en tiempo real</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
-                      <Sparkles className="h-5 w-5 text-primary" />
-                      <span className="text-sm">AI insights de commits</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
-                      <Zap className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Deploy automático</span>
-                    </div>
+                <CardDescription>
+                Coming soon: epic GitHub integration for legendary development
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="text-center">
+                <h3 className="text-lg font-semibold mb-3">GitHub features you'll have:</h3>
+                <div className="grid gap-3 md:grid-cols-2">
+                  <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
+                    <GitBranch className="h-5 w-5 text-primary" />
+                    <span className="text-sm">Branch management</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
+                    <GitPullRequest className="h-5 w-5 text-primary" />
+                    <span className="text-sm">Automatic pull requests</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
+                    <Activity className="h-5 w-5 text-primary" />
+                    <span className="text-sm">Code analytics</span>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
+                    <Shield className="h-5 w-5 text-primary" />
+                    <span className="text-sm">Advanced security</span>
                   </div>
                 </div>
-                
+              </div>
+
                 <div className="flex justify-center pt-4">
                   <Button disabled className="gap-2">
                     <Sparkles className="w-4 h-4" />
-                    Preparando la magia...
+                    Preparing the magic...
                   </Button>
                 </div>
               </CardContent>

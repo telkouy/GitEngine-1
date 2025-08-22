@@ -1,11 +1,10 @@
-
 import { motion } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AppSidebar } from "@/components/navigation/app-sidebar";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Users, Sparkles, MessageSquare, Video, Globe } from "lucide-react";
+import { Users, Sparkles, MessageSquare, Video, Globe, Calendar, Activity, CheckCircle } from "lucide-react";
 
 export default function TeamSyncPage() {
   return (
@@ -36,36 +35,36 @@ export default function TeamSyncPage() {
                 </div>
                 <CardTitle className="text-2xl gradient-text">Team Collaboration</CardTitle>
                 <p className="text-muted-foreground mt-2">
-                  El workspace colaborativo que tu equipo necesita ⚡
+                  The collaborative workspace your team needs ⚡
                 </p>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold mb-3">Colaboración next level:</h3>
+                  <h3 className="text-lg font-semibold mb-3">Next level collaboration:</h3>
                   <div className="grid gap-3 md:grid-cols-2">
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <MessageSquare className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Chat en tiempo real</span>
+                      <span className="text-sm">Real-time chat</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Video className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Video llamadas integradas</span>
+                      <span className="text-sm">Integrated video calls</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Globe className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Sync global automático</span>
+                      <span className="text-sm">Automatic global sync</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Sparkles className="h-5 w-5 text-primary" />
-                      <span className="text-sm">AI para coordinación</span>
+                      <span className="text-sm">AI for coordination</span>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="flex justify-center pt-4">
                   <Button disabled className="gap-2">
                     <Sparkles className="w-4 h-4" />
-                    Conectando equipos...
+                    Connecting teams...
                   </Button>
                 </div>
               </CardContent>

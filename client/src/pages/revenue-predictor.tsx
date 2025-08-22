@@ -41,23 +41,23 @@ export default function RevenuePredictorPage() {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center">
-                  <h3 className="text-lg font-semibold mb-3">Predicciones financieras épicas:</h3>
+                  <h3 className="text-lg font-semibold mb-3">Epic financial predictions:</h3>
                   <div className="grid gap-3 md:grid-cols-2">
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Calculator className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Cálculos precisos</span>
+                      <span className="text-sm">Precise calculations</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <TrendingUp className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Tendencias futuras</span>
+                      <span className="text-sm">Future trends</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <Target className="h-5 w-5 text-primary" />
-                      <span className="text-sm">Objetivos optimizados</span>
+                      <span className="text-sm">Optimized objectives</span>
                     </div>
                     <div className="flex items-center gap-3 p-3 rounded-lg border bg-card/50">
                       <DollarSign className="h-5 w-5 text-primary" />
-                      <span className="text-sm">ROI predictivo</span>
+                      <span className="text-sm">Predictive ROI</span>
                     </div>
                   </div>
                 </div>
