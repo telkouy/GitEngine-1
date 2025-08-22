@@ -475,7 +475,7 @@ export function AppSidebar() {
               >
                 <div>
                   <p className="text-sm font-medium">{user?.name || "Camila"}</p>
-                  <p className="text-xs text-muted-foreground">Force of Nature</p>
+                  <p className="text-xs text-muted-foreground">Force of Vibing</p>
                 </div>
                 <NotificationCenter />
               </motion.div>
