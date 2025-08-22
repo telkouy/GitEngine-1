@@ -173,7 +173,15 @@ export function AppSidebar() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-4"
           >
-            <Button variant="ghost" size="sm" className="w-full justify-start gap-2 text-muted-foreground hover:text-foreground">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
+              onClick={() => {
+                console.log("Search functionality clicked");
+                // TODO: Implement search functionality
+              }}
+            >
               <Search className="w-4 h-4" />
               <span className="text-sm">Search... ⌘K</span>
             </Button>
@@ -197,14 +205,21 @@ export function AppSidebar() {
                 {group.items.map((item, itemIndex) => (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
-                      asChild
                       isActive={item.isActive}
                       tooltip={isCollapsed ? item.title : undefined}
                       className="group relative"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        if (item.subItems) {
+                          toggleGroup(item.title);
+                        } else {
+                          console.log(`Navigating to: ${item.title} (${item.url})`);
+                          // TODO: Add actual navigation logic when routes are implemented
+                        }
+                      }}
                     >
-                      <motion.a
-                        href={item.url}
-                        className="flex items-center w-full"
+                      <motion.div
+                        className="flex items-center w-full cursor-pointer"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ 
@@ -247,7 +262,7 @@ export function AppSidebar() {
                             </motion.div>
                           )}
                         </AnimatePresence>
-                      </motion.a>
+                      </motion.div>
                     </SidebarMenuButton>
 
                     {/* Sub-menu */}
@@ -263,10 +278,15 @@ export function AppSidebar() {
                               transition={{ duration: 0.2, delay: subIndex * 0.05 }}
                             >
                               <SidebarMenuSubItem>
-                                <SidebarMenuSubButton asChild>
-                                  <a href={subItem.url} className="text-sm">
-                                    {subItem.title}
-                                  </a>
+                                <SidebarMenuSubButton
+                                  className="text-sm cursor-pointer"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log(`Navigating to: ${subItem.title} (${subItem.url})`);
+                                    // TODO: Add actual navigation logic when routes are implemented
+                                  }}
+                                >
+                                  {subItem.title}
                                 </SidebarMenuSubButton>
                               </SidebarMenuSubItem>
                             </motion.div>
