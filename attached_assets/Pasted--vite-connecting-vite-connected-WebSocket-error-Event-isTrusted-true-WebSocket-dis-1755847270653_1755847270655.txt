@@ -1,0 +1,46 @@
+[vite] connecting...
+[vite] connected.
+WebSocket error: 
+Event {isTrusted: true}
+
+WebSocket disconnected
+[StatsCards] Rendering with data: 
+Object {commitsToday: 7, insightsGenerated: 12, hoursLogged: 8, docsUpdated: 3}
+WebSocket error: 
+Event {isTrusted: true}
+
+WebSocket disconnected
+doc.updatedAt.toLocaleDateString is not a function
+Global error: 
+TypeError {}
+
+doc.updatedAt.toLocaleDateString is not a function
+Global error: 
+TypeError {}
+
+The above error occurred in the <AIAutoDocs> component:
+
+    at AIAutoDocs (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/src/components/dashboard/ai-auto-docs.tsx:27:30)
+    at div
+    at div
+    at main
+    at main
+    at _c9 (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/src/components/ui/sidebar.tsx:440:48)
+    at div
+    at div
+    at Provider (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=2c56e56e:38:15)
+    at TooltipProvider (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=2c56e56e:65:5)
+    at https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/src/components/ui/sidebar.tsx:60:7
+    at ErrorBoundary (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/src/components/ui/error-boundary.tsx:22:5)
+    at Dashboard (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/src/pages/dashboard.tsx:42:45)
+    at RenderedRoute (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-router-dom.js?v=2c56e56e:5653:26)
+    at Routes (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-router-dom.js?v=2c56e56e:6389:3)
+    at Router (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-router-dom.js?v=2c56e56e:6332:13)
+    at BrowserRouter (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/react-router-dom.js?v=2c56e56e:9416:3)
+    at Provider (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=2c56e56e:38:15)
+    at TooltipProvider (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=2c56e56e:65:5)
+    at ThemeProvider (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/src/components/ui/theme-provider.tsx:25:3)
+    at QueryClientProvider (https://a9c18bb0-a740-4fdd-8ebb-f95627c6a01b-00-263t2yxqngv6y.kirk.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=2c56e56e:2805:3)
+    at App
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ErrorBoundary.
