@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -37,6 +36,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // Navigation items structure
 const navigationItems = [
@@ -118,19 +118,37 @@ const navigationItems = [
 ];
 
 export function AppSidebar() {
-  const { state } = useSidebar();
-  const [expandedGroups, setExpandedGroups] = useState<string[]>(["Development"]);
-  const [notifications] = useState(5);
+  const { state: sidebarState } = useSidebar();
+  const isCollapsed = sidebarState === "collapsed";
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleGroup = (groupTitle: string) => {
-    setExpandedGroups(prev =>
-      prev.includes(groupTitle)
-        ? prev.filter(title => title !== groupTitle)
-        : [...prev, groupTitle]
-    );
+    const newExpandedGroups = new Set(expandedGroups);
+    if (newExpandedGroups.has(groupTitle)) {
+      newExpandedGroups.delete(groupTitle);
+    } else {
+      newExpandedGroups.add(groupTitle);
+    }
+    setExpandedGroups(newExpandedGroups);
   };
 
-  const isCollapsed = state === "collapsed";
+  // Update navigation items to be active based on current route
+  const updatedNavigationItems = navigationItems.map(group => ({
+    ...group,
+    items: group.items.map(item => ({
+      ...item,
+      isActive: location.pathname === item.url,
+      subItems: item.subItems?.map(subItem => ({
+        ...subItem,
+        isActive: location.pathname === subItem.url
+      }))
+    }))
+  }));
+
+
+  const notifications = 5; // Placeholder for actual notification count
 
   return (
     <Sidebar className="border-r border-border/40 backdrop-blur-xl bg-background/80">
@@ -149,7 +167,7 @@ export function AppSidebar() {
             </div>
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary via-accent-violet to-accent-cyan opacity-20 blur-sm" />
           </div>
-          
+
           <AnimatePresence>
             {!isCollapsed && (
               <motion.div
@@ -173,9 +191,9 @@ export function AppSidebar() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-4"
           >
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               className="w-full justify-start gap-2 text-muted-foreground hover:text-foreground"
               onClick={() => {
                 console.log("Search functionality clicked");
@@ -190,7 +208,7 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent className="px-2">
-        {navigationItems.map((group, groupIndex) => (
+        {updatedNavigationItems.map((group, groupIndex) => (
           <SidebarGroup key={group.title} className="py-2">
             <SidebarGroupLabel
               className={`px-2 py-1 text-xs font-semibold text-muted-foreground/80 uppercase tracking-wider ${
@@ -199,7 +217,7 @@ export function AppSidebar() {
             >
               {group.title}
             </SidebarGroupLabel>
-            
+
             <SidebarGroupContent>
               <SidebarMenu>
                 {group.items.map((item, itemIndex) => (
@@ -214,7 +232,7 @@ export function AppSidebar() {
                           toggleGroup(item.title);
                         } else {
                           console.log(`Navigating to: ${item.title} (${item.url})`);
-                          // TODO: Add actual navigation logic when routes are implemented
+                          navigate(item.url);
                         }
                       }}
                     >
@@ -222,14 +240,14 @@ export function AppSidebar() {
                         className="flex items-center w-full cursor-pointer"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ 
-                          duration: 0.3, 
-                          delay: groupIndex * 0.1 + itemIndex * 0.05 
+                        transition={{
+                          duration: 0.3,
+                          delay: groupIndex * 0.1 + itemIndex * 0.05
                         }}
                         whileHover={{ x: 2 }}
                       >
                         <item.icon className="w-4 h-4" />
-                        
+
                         <AnimatePresence>
                           {!isCollapsed && (
                             <motion.div
@@ -240,21 +258,21 @@ export function AppSidebar() {
                               className="flex items-center justify-between w-full ml-2 overflow-hidden"
                             >
                               <span className="truncate">{item.title}</span>
-                              
+
                               <div className="flex items-center gap-1">
                                 {item.badge && (
-                                  <Badge 
+                                  <Badge
                                     variant={item.badge === "Live" ? "default" : "secondary"}
                                     className="text-xs px-1.5 py-0.5"
                                   >
                                     {item.badge}
                                   </Badge>
                                 )}
-                                
+
                                 {item.subItems && (
-                                  <ChevronRight 
+                                  <ChevronRight
                                     className={`w-3 h-3 transition-transform ${
-                                      expandedGroups.includes(item.title) ? "rotate-90" : ""
+                                      expandedGroups.has(item.title) ? "rotate-90" : ""
                                     }`}
                                   />
                                 )}
@@ -266,7 +284,7 @@ export function AppSidebar() {
                     </SidebarMenuButton>
 
                     {/* Sub-menu */}
-                    {item.subItems && !isCollapsed && expandedGroups.includes(item.title) && (
+                    {item.subItems && !isCollapsed && expandedGroups.has(item.title) && (
                       <SidebarMenuSub>
                         <AnimatePresence>
                           {item.subItems.map((subItem, subIndex) => (
@@ -280,10 +298,11 @@ export function AppSidebar() {
                               <SidebarMenuSubItem>
                                 <SidebarMenuSubButton
                                   className="text-sm cursor-pointer"
+                                  isActive={subItem.isActive}
                                   onClick={(e) => {
                                     e.preventDefault();
                                     console.log(`Navigating to: ${subItem.title} (${subItem.url})`);
-                                    // TODO: Add actual navigation logic when routes are implemented
+                                    navigate(subItem.url);
                                   }}
                                 >
                                   {subItem.title}
@@ -316,7 +335,7 @@ export function AppSidebar() {
               </div>
             )}
           </div>
-          
+
           <AnimatePresence>
             {!isCollapsed && (
               <motion.div
