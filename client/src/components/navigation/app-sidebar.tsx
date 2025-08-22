@@ -384,13 +384,13 @@ export function AppSidebar() {
                               transition={{ duration: 0.2 }}
                               className="flex items-center justify-between w-full ml-2 overflow-hidden"
                             >
-                              <span className="truncate">{item.title}</span>
+                              <span className="truncate flex-1 pr-2">{item.title}</span>
 
-                              <div className="flex items-center gap-1">
+                              <div className="flex items-center gap-2 flex-shrink-0">
                                 {item.badge && (
                                   <Badge
                                     variant={item.badge === "Live" ? "default" : "secondary"}
-                                    className="text-xs px-1.5 py-0.5"
+                                    className="text-xs px-2 py-1 whitespace-nowrap"
                                   >
                                     {item.badge}
                                   </Badge>
@@ -398,7 +398,7 @@ export function AppSidebar() {
 
                                 {item.subItems && (
                                   <ChevronRight
-                                    className={`w-3 h-3 transition-transform ${
+                                    className={`w-3 h-3 transition-transform flex-shrink-0 ${
                                       expandedGroups.has(item.title) ? "rotate-90" : ""
                                     }`}
                                   />
