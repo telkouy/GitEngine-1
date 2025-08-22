@@ -8,7 +8,8 @@ interface StatsCardsProps {
 }
 
 export function StatsCards({ data }: StatsCardsProps) {
-  if (!data) {
+  // Show skeleton while loading or if no data
+  if (!data || (data.commitsToday === undefined && data.insightsGenerated === undefined)) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
         {Array.from({ length: 4 }).map((_, i) => (

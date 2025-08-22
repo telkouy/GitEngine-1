@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState, useMemo } from "react";
-import { CommitsTableSkeleton } from "@/components/ui/skeleton-components";
+import { TableSkeleton } from "@/components/ui/skeleton-components";
 import type { Commit } from "@shared/schema";
 
 interface CommitsTableProps {
@@ -19,19 +19,19 @@ export function CommitsTable({ data = [] }: CommitsTableProps) {
   const filteredCommits = useMemo(() => {
     return data.filter(commit => {
       const matchesSearch = commit.message.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          commit.branch.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesFilter = filterType === "all" || commit.branch === filterType;
+                          commit.project.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesFilter = filterType === "all" || commit.project === filterType;
       return matchesSearch && matchesFilter;
     });
   }, [data, searchTerm, filterType]);
 
   const branches = useMemo(() => {
-    const uniqueBranches = [...new Set(data.map(commit => commit.branch))];
+    const uniqueBranches = Array.from(new Set(data.map(commit => commit.project)));
     return uniqueBranches;
   }, [data]);
 
   if (!data || data.length === 0) {
-    return <CommitsTableSkeleton />;
+    return <TableSkeleton rows={5} />;
   }
 
   const getImpactColor = (impact: string) => {
@@ -85,10 +85,10 @@ export function CommitsTable({ data = [] }: CommitsTableProps) {
         <Select value={filterType} onValueChange={setFilterType}>
           <SelectTrigger className="w-full sm:w-48 bg-glass-secondary border-white/10">
             <Filter className="w-4 h-4 mr-2" />
-            <SelectValue placeholder="Filter by branch" />
+            <SelectValue placeholder="Filter by project" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All branches</SelectItem>
+            <SelectItem value="all">All projects</SelectItem>
             {branches.map(branch => (
               <SelectItem key={branch} value={branch}>{branch}</SelectItem>
             ))}

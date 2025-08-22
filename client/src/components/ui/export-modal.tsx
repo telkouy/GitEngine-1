@@ -279,14 +279,14 @@ export function ExportModal({ trigger, data, filename = 'dashboard-export' }: Ex
                 <Label className="text-sm text-muted-foreground">From</Label>
                 <DatePicker
                   date={dateRange.from}
-                  onSelect={(date) => setDateRange(prev => ({ ...prev, from: date }))}
+                  onDateChange={(date) => setDateRange(prev => ({ ...prev, from: date }))}
                 />
               </div>
               <div>
                 <Label className="text-sm text-muted-foreground">To</Label>
                 <DatePicker
                   date={dateRange.to}
-                  onSelect={(date) => setDateRange(prev => ({ ...prev, to: date }))}
+                  onDateChange={(date) => setDateRange(prev => ({ ...prev, to: date }))}
                 />
               </div>
             </div>
