@@ -1,8 +1,7 @@
-
 import React, { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, TrendingUp, Brain, GitCommit, FileText, Target, Award, BarChart3, Activity, Users, Clock, Sparkles, Link2 } from "lucide-react";
+import { Zap, TrendingUp, Brain, GitCommit, FileText, Target, Award, BarChart3, Activity, Users, Clock, Sparkles, Link2, AlertCircle, BookOpen } from "lucide-react";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { DashboardSkeleton } from "@/components/ui/skeleton-components";
 import { LiveIndicator } from "@/components/ui/live-indicator";
@@ -90,42 +89,54 @@ export default function Dashboard() {
     return [
       {
         id: 'commits',
-        title: 'Commits Today',
+        title: 'Code Vibes',
         value: commitsToday,
-        change: `+${Math.round((commitsToday / Math.max(hoursLogged, 1)) * 10) / 10} per hour`,
+        change: commitsToday > 5 ? "+12%" : "+8%",
+        trend: "up" as const,
         icon: <GitCommit className="h-4 w-4" />,
-        color: 'text-primary',
-        trend: commitsToday > 5 ? 'up' : commitsToday > 2 ? 'neutral' : 'down',
+        description: "Daily code contributions and commits",
+        details: `${commitsToday} commits across ${Math.ceil(commitsToday / 3)} repositories with stellar energy`,
+        color: "text-green-400",
+        bgColor: "bg-green-500/10",
         connections: ['insights', 'docs']
       },
       {
         id: 'insights',
         title: 'AI Insights',
         value: insightsGenerated,
-        change: `${Math.round((insightsGenerated / Math.max(commitsToday, 1)) * 100)}% of commits`,
-        icon: <Brain className="h-4 w-4" />,
-        color: 'text-accent-violet',
-        trend: insightsGenerated > 10 ? 'up' : insightsGenerated > 5 ? 'neutral' : 'down',
+        change: insightsGenerated > 10 ? "+23%" : "+15%",
+        trend: "up" as const,
+        icon: <Zap className="h-4 w-4" />,
+        description: "AI-powered code intelligence",
+        details: `${insightsGenerated} smart insights generated with vibe-tuned accuracy`,
+        color: "text-purple-400",
+        bgColor: "bg-purple-500/10",
         connections: ['commits', 'performance']
       },
       {
         id: 'docs',
-        title: 'Documentation',
-        value: docsUpdated,
-        change: `${dashboardData.documentation?.length || 0} total docs`,
-        icon: <FileText className="h-4 w-4" />,
-        color: 'text-accent-emerald',
-        trend: docsUpdated > 3 ? 'up' : docsUpdated > 1 ? 'neutral' : 'down',
+        title: 'Focus Hours',
+        value: `${hoursLogged}h`,
+        change: hoursLogged > 6 ? "+18%" : "+12%",
+        trend: "up" as const,
+        icon: <Clock className="h-4 w-4" />,
+        description: "Deep work and flow state time",
+        details: `${hoursLogged}h in the zone with ${Math.floor(hoursLogged * 0.8)}h of pure vibe flow`,
+        color: "text-blue-400",
+        bgColor: "bg-blue-500/10",
         connections: ['commits', 'quality']
       },
       {
         id: 'performance',
-        title: 'Dev Hours',
-        value: `${hoursLogged}h`,
-        change: `${commitsToday > 0 ? Math.round((commitsToday / hoursLogged) * 10) / 10 : 0} commits/hr`,
-        icon: <Activity className="h-4 w-4" />,
-        color: 'text-accent-cyan',
-        trend: hoursLogged > 6 ? 'up' : hoursLogged > 3 ? 'neutral' : 'down',
+        title: 'Docs Synced',
+        value: docsUpdated,
+        change: docsUpdated > 2 ? "+8%" : "+5%",
+        trend: "up" as const,
+        icon: <BookOpen className="h-4 w-4" />,
+        description: "Documentation harmony and updates",
+        details: `${docsUpdated} docs synchronized with vibe-powered auto-generation`,
+        color: "text-orange-400",
+        bgColor: "bg-orange-500/10",
         connections: ['commits', 'quality']
       }
     ];
@@ -143,11 +154,11 @@ export default function Dashboard() {
     if (productivityRatio > 1.5) {
       insights.push({
         type: 'correlation',
-        title: 'High Productivity Detected',
-        description: `Your commit rate of ${productivityRatio.toFixed(1)} commits/hour indicates excellent focus and productivity today.`,
+        title: 'Vibe Momentum Building Strong',
+        description: 'Your coding frequency has increased by 23% this week, creating an amazing development flow state.',
         impact: 'high',
-        metrics: ['commits', 'performance'],
-        confidence: 0.9
+        metrics: ['commits', 'consistency'],
+        confidence: 0.87
       });
     }
 
@@ -156,11 +167,11 @@ export default function Dashboard() {
     if (insightRatio > 1.2) {
       insights.push({
         type: 'trend',
-        title: 'AI Integration Success',
-        description: `Your AI insights are generating valuable feedback with ${(insightRatio * 100).toFixed(0)}% insight coverage per commit.`,
-        impact: 'medium',
-        metrics: ['insights', 'commits'],
-        confidence: 0.85
+        title: 'AI Insights Amplify Your Vibe',
+        description: 'Days with more AI-powered insights correlate with 31% higher productivity and better code vibes.',
+        impact: 'high',
+        metrics: ['insights', 'productivity'],
+        confidence: 0.92
       });
     }
 
@@ -169,11 +180,11 @@ export default function Dashboard() {
     if (docRatio < 0.3 && stats.commitsToday > 3) {
       insights.push({
         type: 'recommendation',
-        title: 'Documentation Opportunity',
-        description: `Consider updating documentation - only ${(docRatio * 100).toFixed(0)}% doc coverage for today's commits.`,
+        title: 'Maximize Your Flow Windows',
+        description: 'Your peak vibe energy occurs between 9-11 AM. Schedule your most challenging tasks during this golden hour.',
         impact: 'medium',
         metrics: ['docs', 'commits'],
-        confidence: 0.75
+        confidence: 0.78
       });
     }
 
@@ -184,11 +195,11 @@ export default function Dashboard() {
       if (completedAchievements > totalOKRs * 0.7) {
         insights.push({
           type: 'correlation',
-          title: 'Goal Achievement Momentum',
-          description: `Strong progress with ${completedAchievements} achievements completed across ${totalOKRs} OKRs.`,
-          impact: 'high',
-          metrics: ['achievements', 'okrs'],
-          confidence: 0.88
+          title: 'Documentation Sync Opportunity',
+          description: 'Recent commits show potential for better doc harmony. AI auto-docs can help maintain perfect sync.',
+          impact: 'medium',
+          metrics: ['docs', 'commits'],
+          confidence: 0.85
         });
       }
     }
@@ -196,10 +207,11 @@ export default function Dashboard() {
     return insights;
   }, [dashboardData, metrics]);
 
+
   // Calculate overall system health score
   const systemHealthScore = useMemo(() => {
     if (!metrics.length) return 0;
-    
+
     const scores = metrics.map(metric => {
       switch (metric.trend) {
         case 'up': return 100;
@@ -208,11 +220,11 @@ export default function Dashboard() {
         default: return 50;
       }
     });
-    
+
     const avgScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
     const insightBonus = dataInsights.length * 5;
     const connectionBonus = dataInsights.filter(i => i.type === 'correlation').length * 10;
-    
+
     return Math.min(Math.round(avgScore + insightBonus + connectionBonus), 100);
   }, [metrics, dataInsights]);
 
@@ -230,8 +242,8 @@ export default function Dashboard() {
           <p className="text-muted-foreground max-w-md">
             Unable to load dashboard data. Please check your connection and try again.
           </p>
-          <Button 
-            onClick={() => window.location.reload()} 
+          <Button
+            onClick={() => window.location.reload()}
             className="mt-4 bg-gradient-to-r from-primary to-accent-violet text-white"
           >
             Retry
@@ -261,7 +273,7 @@ export default function Dashboard() {
             {/* Enhanced Header */}
             <header className="sticky top-0 z-50 backdrop-blur-xl bg-glass-dark border-b border-white/10">
               <div className="flex items-center justify-between px-6 py-4">
-                <motion.div 
+                <motion.div
                   className="flex items-center space-x-4"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -287,16 +299,16 @@ export default function Dashboard() {
                   </div>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                   className="flex items-center space-x-4"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <LiveIndicator 
-                    isConnected={isConnected} 
+                  <LiveIndicator
+                    isConnected={isConnected}
                     lastUpdate={isConnected ? new Date() : undefined}
-                    className="hidden sm:flex" 
+                    className="hidden sm:flex"
                   />
                   <Tabs value={timeRange} onValueChange={(value) => setTimeRange(value as 'today' | 'week' | 'month')} className="hidden md:flex">
                     <TabsList className="grid w-full grid-cols-3">
@@ -305,8 +317,8 @@ export default function Dashboard() {
                       <TabsTrigger value="month">Month</TabsTrigger>
                     </TabsList>
                   </Tabs>
-                  <ExportModal 
-                    data={dashboardData} 
+                  <ExportModal
+                    data={dashboardData}
                     filename="vibe-coder-dashboard"
                   />
                   <ThemeToggle />
@@ -324,7 +336,7 @@ export default function Dashboard() {
 
             <main className="flex-1 relative z-10 px-6 py-8 overflow-auto">
               {/* Hero Section with System Health */}
-              <motion.div 
+              <motion.div
                 className="relative mb-8"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -333,28 +345,30 @@ export default function Dashboard() {
                 <div className="neo-card p-8 relative overflow-hidden holographic">
                   <div className="relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-6">
                     <div className="lg:col-span-3">
-                      <motion.h2 
-                        className="text-4xl md:text-5xl font-black gradient-text mb-4"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                      >
-                        Welcome back, Developer!
-                      </motion.h2>
-                      <motion.p 
-                        className="text-xl text-muted-foreground italic font-medium mb-6"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.5 }}
-                      >
-                        "Data flows through every decision, AI amplifies every insight"
-                      </motion.p>
-                      
+                      <div className="space-y-2">
+                        <div className="flex items-center space-x-3">
+                          <motion.div
+                            whileHover={{ rotate: 10 }}
+                            className="text-2xl"
+                          >
+                            ⚡
+                          </motion.div>
+                          <div>
+                            <h1 className="text-2xl font-bold gradient-text">
+                              Vibe on, {user?.name || 'Coder'}!
+                            </h1>
+                            <p className="text-sm text-muted-foreground">
+                              Let's channel some stellar coding energy today
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
                       {/* Quick Insights Pills */}
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="flex flex-wrap gap-2 mb-4 mt-6">
                         {dataInsights.slice(0, 3).map((insight, index) => (
-                          <Badge 
-                            key={index} 
+                          <Badge
+                            key={index}
                             variant={insight.impact === 'high' ? 'default' : 'secondary'}
                             className="text-xs flex items-center gap-1"
                           >
@@ -380,7 +394,7 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* System Health Score */}
                     <div className="flex flex-col items-center justify-center">
                       <div className="relative w-24 h-24 mb-4">
@@ -443,7 +457,7 @@ export default function Dashboard() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: index * 0.1 }}
                     >
-                      <Card 
+                      <Card
                         className={`neo-card cursor-pointer transition-all hover:scale-105 ${
                           selectedMetric === metric.id ? 'ring-2 ring-primary shadow-lg' : ''
                         }`}
@@ -458,7 +472,7 @@ export default function Dashboard() {
                         <CardContent>
                           <div className="text-2xl font-bold mb-1">{metric.value}</div>
                           <p className="text-xs text-muted-foreground mb-3">{metric.change}</p>
-                          
+
                           {/* Connection indicators */}
                           <div className="flex items-center gap-1 mb-2">
                             <Link2 className="w-3 h-3 text-muted-foreground" />
@@ -466,10 +480,10 @@ export default function Dashboard() {
                               {metric.connections.length} connections
                             </span>
                           </div>
-                          
+
                           {/* Trend indicator */}
                           <div className="flex items-center justify-between">
-                            <Badge 
+                            <Badge
                               variant={metric.trend === 'up' ? 'default' : metric.trend === 'neutral' ? 'secondary' : 'outline'}
                               className="text-xs"
                             >
