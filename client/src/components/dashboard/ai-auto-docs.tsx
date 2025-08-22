@@ -265,7 +265,7 @@ export function AIAutoDocs({ userId }: AIAutoDocsProps) {
                           <Download className="h-4 w-4" />
                         </Button>
                         <span className="text-xs text-muted-foreground">
-                          {doc.updatedAt.toLocaleDateString()}
+                          {new Date(doc.updatedAt).toLocaleDateString()}
                         </span>
                       </div>
                     </div>
